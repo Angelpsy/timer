@@ -4,6 +4,7 @@ import './index.css';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import AppToolbar from '../../Components/Topbar';
 import Header from '../../Components/Header';
+import TimersContainer from '../../Container/TimersContainer';
 
 class BaseLayout extends Component {
     render() {
@@ -16,6 +17,7 @@ class BaseLayout extends Component {
                 <AppToolbar />
                 <main className="l-base__main">
                     <Header />
+                    <TimersContainer />
                 </main>
             </div>
         );

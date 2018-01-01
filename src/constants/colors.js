@@ -1,6 +1,8 @@
 import {
     grey900, grey800, grey700,
-    grey200, grey100, grey50
+    grey500, grey300, grey50,
+    deepOrangeA700, deepOrangeA400, deepOrangeA200, deepOrangeA100,
+    deepOrange700, deepOrange600, deepOrange500,
 } from 'material-ui/styles/colors';
 // import {fade} from 'material-ui/utils/colorManipulator';
 
@@ -9,6 +11,10 @@ export default {
     bgSecondary: grey900,
     bgTertiary: grey700,
     textPrimary: grey50,
-    textSecondary: grey100,
-    textTertiary: grey200,
+    textSecondary: grey300,
+    textTertiary: grey500,
+
+    accent1Color: deepOrangeA700,
+    accent2Color: deepOrangeA400,
+    accent3Color: deepOrangeA200,
 };
