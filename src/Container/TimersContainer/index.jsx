@@ -30,6 +30,7 @@ class TimersContainer extends Component {
             <SelectableList defaultValue={this.state.idSelected}>
                 {
                     this.state.timers
+                        .filter(timer => timer.isTopLevel)
                         .sort((timerA, timerB) => timerA.order - timerB.order)
                         .map((timer) => {
                             return (
