@@ -1,3 +1,3 @@
-import {selectedTimer} from './timerActions';
+import {idSelectedTimer} from './timerActions';
 
-export {selectedTimer};
+export {idSelectedTimer};
