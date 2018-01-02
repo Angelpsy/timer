@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
 
 import {timers} from './TestData';
+
+import {selectedTimer} from '../../actions';
 
 class TimersContainer extends Component {
     state = {
@@ -13,7 +16,8 @@ class TimersContainer extends Component {
     };
 
     componentDidMount() {
-        console.log(this.state.idSelected);
+        console.log('props.selectedTimer: ', this.props.selectedTimer);
+        console.log('props: ', this.props);
         // setTimeout(() => {
         //     this.setState({
         //         idSelected: '',
@@ -23,6 +27,7 @@ class TimersContainer extends Component {
 
     onSelectTimer = (timer) => {
         console.log(timer);
+        this.props.onSelectTimer(timer.id);
     };
 
     render() {
@@ -49,5 +54,22 @@ class TimersContainer extends Component {
     }
 }
 
-export default TimersContainer;
+const mapStateToProps = state => {
+    return {
+        selectedTimer: state.selectedTimer,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSelectTimer: id => {
+            dispatch(selectedTimer(id));
+        }
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(TimersContainer);
 

@@ -11,7 +11,7 @@ import color from './constants/colors';
 
 const muiTheme = getMuiTheme(baseTheme);
 
-muiTheme.palette = Object.assign({}, muiTheme.palette, color);
+muiTheme.palette = { ...muiTheme.palette, ...color};
 
 class App extends Component {
     render() {
