@@ -7,9 +7,9 @@ import SoloTimer from './SoloTimer';
 class Timer extends Component {
 
     render() {
-        const {childs} = this.props;
+        const {children} = this.props;
 
-        if (!childs || childs.length === 0) {
+        if (!children || children.length === 0) {
             return <SoloTimer {...this.props}/>
         } else {
             // TODO: timerGroup

@@ -29,7 +29,7 @@ const iconEmum = {
 class Timer extends Component {
 
     render() {
-        const {id, title, description, childs, value, left, state} = this.props;
+        const {id, title, description, children, value, left, state} = this.props;
 
         const IconState = iconEmum[state];
 

@@ -5,14 +5,9 @@ import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
 
-import {timers} from './TestData';
-
 import {idSelectedTimer} from '../../actions';
 
 class TimersContainer extends Component {
-    state = {
-        timers,
-    };
 
     onSelectTimer = (timer) => {
         this.props.onSelectTimer(timer.id);
@@ -23,7 +18,7 @@ class TimersContainer extends Component {
             <SelectableList
                 selectedId={this.props.idSelectedTimer} >
                 {
-                    this.state.timers
+                    this.props.timers
                         .filter(timer => timer.isTopLevel)
                         .sort((timerA, timerB) => timerA.order - timerB.order)
                         .map((timer) => {
@@ -46,6 +41,7 @@ class TimersContainer extends Component {
 const mapStateToProps = state => {
     return {
         idSelectedTimer: state.idSelectedTimer,
+        timers: state.timers,
     }
 };
 
