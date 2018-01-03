@@ -13,7 +13,7 @@ const timers = (state = _timers, action) => {
                     order: 0,
                     title: action.payload.title,
                     description: action.payload.description,
-                    children: null,
+                    childTimers: null,
                     value: action.payload.value,
                     left: action.payload.value,
                     state: 'stop',

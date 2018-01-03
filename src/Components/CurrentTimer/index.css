@@ -1,0 +1,22 @@
+.b-current-timer {
+    /*  */
+}
+
+.b-current-timer__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.b-current-timer__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.b-current-timer__time-val {
+    text-align: right;
+    font-size: 1.25em;
+    padding: 2.5px 0;
+}

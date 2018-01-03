@@ -6,7 +6,7 @@ const childTimers = [
         order: 0,
         title: 'Timer 41',
         description: 'Description Timer 41',
-        children: null,
+        childTimers: null,
         value: 100, // s
         left: 100, // s
         state: 'stop', // ['stop', 'pause', 'play']
@@ -16,7 +16,7 @@ const childTimers = [
         order: 1,
         title: 'Timer 42',
         description: 'Description Timer 42',
-        children: null,
+        childTimers: null,
         value: 100, // s
         left: 100, // s
         state: 'pause',
@@ -26,7 +26,7 @@ const childTimers = [
         order: 1,
         title: 'Timer 43',
         description: 'Description Timer 43',
-        children: null,
+        childTimers: null,
         value: 1000, // s
         left: 100, // s
         state: 'play',
@@ -40,7 +40,7 @@ let timers = [
         order: 0,
         title: 'Timer 1',
         description: 'Description Timer 1',
-        children: null,
+        childTimers: null,
         value: 100, // s
         left: 100, // s
         state: 'stop', // ['stop', 'pause', 'play']
@@ -51,7 +51,7 @@ let timers = [
         order: 1,
         title: 'Timer 2',
         description: 'Description Timer 2',
-        children: null,
+        childTimers: null,
         value: 100, // s
         left: 100, // s
         state: 'pause',
@@ -62,8 +62,8 @@ let timers = [
         order: 1,
         title: 'Timer 3',
         description: 'Description Timer 3',
-        children: null,
-        value: 1000, // s
+        childTimers: null,
+        value: 100000, // s
         left: 100, // s
         state: 'play',
         isTopLevel: true,
@@ -73,7 +73,7 @@ let timers = [
         order: 4,
         title: 'Timer 4',
         description: 'Description Timer 4',
-        children: childTimers.map((timer => timer.id)),
+        childTimers: childTimers.map((timer => timer.id)),
         value: 1000, // s
         left: 100, // s
         state: 'play',

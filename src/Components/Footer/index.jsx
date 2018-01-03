@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {Toolbar} from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import IconClose from 'material-ui/svg-icons/navigation/close';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
+import CurrentTimerContainer from '../../Container/CurrentTimerContainer';
+
 import './index.css';
-import {idSelectedTimer} from "../../actions";
 
 class Footer extends Component {
     render() {
@@ -21,38 +20,17 @@ class Footer extends Component {
                         height: 'auto',
                         minHeight: this.props.muiTheme.toolbar.height + 'px',
                         padding: `${this.props.muiTheme.spacing.desktopGutterLess}px`,
+                        display: 'block',
                 }}>
-                    Footer (Current Timer)
-                    <IconButton
-                        className={'b-footer__close'}
-                        onClick={this.props.resetSelectTimer}
-                        style={{
-                            opacity: this.props.idSelectedTimer ? 1 : 0,
-                        }}
-                    >
-                        <IconClose />
-                    </IconButton>
+                    <CurrentTimerContainer />
                 </Toolbar>
             </footer>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        idSelectedTimer: state.idSelectedTimer,
-    }
+Footer.propType = {
+    className: PropTypes.string,
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        resetSelectTimer: () => {
-            dispatch(idSelectedTimer(''));
-        }
-    }
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(muiThemeable()(Footer));
+export default muiThemeable()(Footer);

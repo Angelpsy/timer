@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import './index.css';
 
 import Subheader from 'material-ui/Subheader';
@@ -9,6 +8,7 @@ import IconPause from 'material-ui/svg-icons/av/pause';
 import IconStop from 'material-ui/svg-icons/av/stop';
 
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import {timerShape} from "../../constants/propTypes";
 
 const buttonStyles = {
     marginRight: 24,
@@ -29,7 +29,7 @@ const iconEmum = {
 class Timer extends Component {
 
     render() {
-        const {id, title, description, children, value, left, state} = this.props;
+        const {id, title, description, childTimers, value, left, state} = this.props;
 
         const IconState = iconEmum[state];
 
@@ -60,7 +60,7 @@ class Timer extends Component {
 
                     <div className="b-timer__values" style={{
                         color: this.props.muiTheme.palette.textSecondary,
-                        fontSize: '2em'
+                        fontSize: '1.75em'
                     }}>
                         {state !== 'stop' ?
                             <span className="b-timer__left"
@@ -77,21 +77,6 @@ class Timer extends Component {
     }
 }
 
-Timer.propTypes = {
-    id: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    value: PropTypes.number.isRequired,
-    left: (props, propName, componentName) => {
-        if (props.value < props[propName] || props[propName] < 0) {
-            return new Error(
-                'Invalid prop `' + propName + '` supplied to' +
-                ' `' + componentName + '`. Validation failed.'
-            );
-        }
-    },
-    state: PropTypes.oneOf(['stop', 'pause', 'play']).isRequired,
-    isTopLevel: PropTypes.bool,
-};
+Timer.propTypes = timerShape;
 
 export default muiThemeable()(Timer);

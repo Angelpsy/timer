@@ -1,5 +1,5 @@
 .b-footer {
-    /**/
+    overflow: hidden;
 }
 
 .b-footer__toolbar {
@@ -9,6 +9,6 @@
 
 .b-footer__close {
     position: absolute !important;
-    top: 0;
-    right: 0;
+    top: -15px;
+    right: -15px;
 }
