@@ -1,0 +1,14 @@
+.b-footer {
+    /**/
+}
+
+.b-footer__toolbar {
+    display: flex;
+    align-items: center;
+}
+
+.b-footer__close {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+}

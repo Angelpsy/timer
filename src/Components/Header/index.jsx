@@ -7,7 +7,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 class Header extends Component {
     render() {
         return (
-            <div className='b-header'>
+            <header className='b-header'>
                 <Toolbar
                     style={{
                         backgroundColor: this.props.muiTheme.palette.bgTertiary,
@@ -18,7 +18,7 @@ class Header extends Component {
                         данные по таймеру по время работы таймера (? возможно будет достаточно в footer`е) */}
                     </ToolbarGroup>
                 </Toolbar>
-            </div>
+            </header>
         );
     }
 }

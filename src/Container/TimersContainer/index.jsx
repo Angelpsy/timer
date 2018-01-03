@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';

@@ -82,7 +82,4 @@ let timers = [
 ];
 
 timers = timers.concat(childTimers);
-
-console.dir(timers);
-
 export {timers};

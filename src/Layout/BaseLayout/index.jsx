@@ -4,6 +4,7 @@ import './index.css';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import Navbar from '../../Components/Navbar';
 import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
 import TimersContainer from '../../Container/TimersContainer';
 
 class BaseLayout extends Component {
@@ -19,6 +20,7 @@ class BaseLayout extends Component {
                     <Header />
                     <TimersContainer />
                 </main>
+                <Footer className={'l-base__footer'}/>
             </div>
         );
     }

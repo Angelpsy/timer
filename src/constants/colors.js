@@ -1,8 +1,7 @@
 import {
     grey900, grey800, grey700,
     grey500, grey300, grey50,
-    deepOrangeA700, deepOrangeA400, deepOrangeA200, deepOrangeA100,
-    deepOrange700, deepOrange600, deepOrange500,
+    deepOrangeA700, deepOrangeA400, deepOrangeA200,
 } from 'material-ui/styles/colors';
 // import {fade} from 'material-ui/utils/colorManipulator';
 
