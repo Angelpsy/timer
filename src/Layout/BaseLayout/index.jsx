@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.css';
 
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import AppToolbar from '../../Components/Topbar';
+import Navbar from '../../Components/Navbar';
 import Header from '../../Components/Header';
 import TimersContainer from '../../Container/TimersContainer';
 
@@ -14,7 +14,7 @@ class BaseLayout extends Component {
                      backgroundColor: this.props.muiTheme.palette.bgPrimary,
                      color: this.props.muiTheme.palette.textPrimary,
                  }}>
-                <AppToolbar />
+                <Navbar />
                 <main className="l-base__main">
                     <Header />
                     <TimersContainer />

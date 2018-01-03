@@ -4,7 +4,7 @@ import './index.css';
 import AppBar from 'material-ui/AppBar';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
-class AppToolbar extends Component {
+class Navbar extends Component {
     render() {
         return (
             <AppBar title="My Timer" style={{
@@ -19,4 +19,4 @@ class AppToolbar extends Component {
     }
 }
 
-export default muiThemeable()(AppToolbar);
+export default muiThemeable()(Navbar);
