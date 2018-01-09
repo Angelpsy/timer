@@ -16,19 +16,15 @@ class BaseLayout extends Component {
                      backgroundColor: this.props.muiTheme.palette.bgPrimary,
                      color: this.props.muiTheme.palette.textPrimary,
                  }}>
-                <Navbar />
-                <main
-                    className="l-base__main"
-                    style={{
-                        height: `calc(100% - ${this.props.style.navbar.height}px)`
-                    }}
-                >
+                <Navbar className='l-base__navbar' />
+                <main className="l-base__main">
                     <Header />
-                    <div className='l-base__timer-list'
-                        style={{
-                            height: `calc(100% - ${this.props.style.header.height + this.props.style.footer.height}px)`
-                        }}>
-                        <TimersContainer />
+                    <div className='l-base__timer-list'>
+                        <TimersContainer
+                            style={{
+                                overflowY: 'auto'
+                            }}
+                        />
                     </div>
 
                 </main>
@@ -38,14 +34,4 @@ class BaseLayout extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        style: state.styles,
-    }
-};
-
-export default muiThemeable()(
-    connect(
-        mapStateToProps,
-    )(BaseLayout)
-);
+export default muiThemeable()(BaseLayout);

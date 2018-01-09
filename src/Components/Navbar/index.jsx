@@ -4,8 +4,6 @@ import './index.css';
 import AppBar from 'material-ui/AppBar';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
-import wrapComponentWithResize from '../ComponentWithResize';
-
 class Navbar extends Component {
     render() {
         return (
@@ -18,14 +16,10 @@ class Navbar extends Component {
                     color: this.props.muiTheme.palette.textSecondary,
                 }}
                 showMenuIconButton={false}
+                className={this.props.className}
             />
         );
     }
 }
 
-export default muiThemeable()(
-    wrapComponentWithResize(
-        Navbar,
-        'navbar',
-    )
-);
+export default muiThemeable()(Navbar);

@@ -9,10 +9,6 @@ import {selectedTimer} from '../../actions';
 
 class TimersContainer extends Component {
 
-    // componentDidMount() {
-    //     this.props.resizeNavbar({height: 30});
-    // }
-
     onSelectTimer = (timer) => {
         this.props.onSelectTimer(timer.id);
     };
