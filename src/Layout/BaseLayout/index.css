@@ -3,6 +3,10 @@
     height: 100%;
 }
 
+.l-base__timer-list {
+    overflow-y: auto;
+}
+
 .l-base__footer {
     position: absolute;
     bottom: 0;
