@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import CurrentTimer from  '../../Components/CurrentTimer';
 
 import {timerShape} from '../../constants/propTypes';
-import {idSelectedTimer} from "../../actions";
+import {selectedTimer} from "../../actions";
 
 class CurrentTimerContainer extends Component {
     render() {
@@ -25,14 +25,14 @@ class CurrentTimerContainer extends Component {
 // TODO: продумать как передавать value group timer
 const mapStateToProps = state => {
     return {
-        selectedTimer: state.idSelectedTimer ? state.timers.find(timer => timer.id === state.idSelectedTimer) : null,
+        selectedTimer: state.selectedTimer ? state.timers.find(timer => timer.id === state.selectedTimer) : null,
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         resetSelectTimer: () => {
-            dispatch(idSelectedTimer(''));
+            dispatch(selectedTimer(''));
         }
     }
 };

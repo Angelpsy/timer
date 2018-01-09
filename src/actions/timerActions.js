@@ -1,6 +1,11 @@
 import {ACTIONS} from '../constants/actions';
 
-export const idSelectedTimer = id => {
+
+/**
+ * @param {String|Number} id
+ * @return {{type: string, payload: {id: String|Number}}}
+ */
+export const selectedTimer = id => {
     return {
         type: ACTIONS.SELECTED_TIMER,
         payload: {
@@ -15,7 +20,7 @@ export const idSelectedTimer = id => {
  */
 export const addTimer = timer => {
     return {
-        type: ACTIONS.SELECTED_TIMER,
+        type: ACTIONS.ADD_TIMER,
         payload: {
             title: timer.title,
             description: timer.description,

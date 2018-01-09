@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
-import idSelectedTimer from './selectedTimer';
+import selectedTimer from './selectedTimer';
 import timers from './timers';
+import styles from './styles';
 
 const appReducers = combineReducers({
-    idSelectedTimer,
+    selectedTimer,
     timers,
+    styles,
 });
 
 export default appReducers;

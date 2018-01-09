@@ -5,6 +5,8 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import CurrentTimerContainer from '../../Container/CurrentTimerContainer';
 
+import wrapComponentWithResize from '../ComponentWithResize';
+
 import './index.css';
 
 class Footer extends Component {
@@ -33,4 +35,6 @@ Footer.propType = {
     className: PropTypes.string,
 };
 
-export default muiThemeable()(Footer);
+export default muiThemeable()(
+    wrapComponentWithResize(Footer, 'footer')
+);

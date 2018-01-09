@@ -1,3 +1,4 @@
-import {idSelectedTimer} from './timerActions';
+import {selectedTimer} from './timerActions';
+import * as resize from './styles';
 
-export {idSelectedTimer};
+export {selectedTimer, resize};

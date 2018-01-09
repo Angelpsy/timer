@@ -5,9 +5,13 @@ import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
 
-import {idSelectedTimer} from '../../actions';
+import {selectedTimer} from '../../actions';
 
 class TimersContainer extends Component {
+
+    // componentDidMount() {
+    //     this.props.resizeNavbar({height: 30});
+    // }
 
     onSelectTimer = (timer) => {
         this.props.onSelectTimer(timer.id);
@@ -16,7 +20,7 @@ class TimersContainer extends Component {
     render() {
         return (
             <SelectableList
-                selectedId={this.props.idSelectedTimer} >
+                selectedId={this.props.selectedTimer} >
                 {
                     this.props.timers
                         .filter(timer => timer.isTopLevel)
@@ -40,7 +44,7 @@ class TimersContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        idSelectedTimer: state.idSelectedTimer,
+        selectedTimer: state.selectedTimer,
         timers: state.timers,
     }
 };
@@ -48,8 +52,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSelectTimer: id => {
-            dispatch(idSelectedTimer(id));
-        }
+            dispatch(selectedTimer(id));
+        },
     }
 };
 

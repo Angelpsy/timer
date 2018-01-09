@@ -1,6 +1,6 @@
 import {ACTIONS} from '../constants/actions';
 
-const idSelectedTimer = (state = '', action) => {
+const selectedTimer = (state = '', action) => {
     switch (action.type) {
         case ACTIONS.SELECTED_TIMER:
             return action.payload.id;
@@ -9,4 +9,4 @@ const idSelectedTimer = (state = '', action) => {
     }
 };
 
-export default idSelectedTimer
+export default selectedTimer
