@@ -9,7 +9,6 @@ import {selectedTimer,
     playTimer,
     pauseTimer,
     stopTimer,
-    tickTimer,
 } from "../../actions";
 
 class CurrentTimerContainer extends Component {
@@ -21,7 +20,6 @@ class CurrentTimerContainer extends Component {
                 playTimer={this.props.playTimer}
                 pauseTimer={this.props.pauseTimer}
                 stopTimer={this.props.stopTimer}
-                tickTimer={this.props.tickTimer}
                 {...this.props.selectedTimer}
             />
         );
@@ -51,9 +49,6 @@ const mapDispatchToProps = dispatch => {
         },
         stopTimer: (id) => {
             dispatch(stopTimer(id));
-        },
-        tickTimer: (id) => {
-            dispatch(tickTimer(id));
         },
     }
 };

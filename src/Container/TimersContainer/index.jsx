@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
+import Ticker from '../../Container/Ticker';
 
-import {selectedTimer} from '../../actions';
+import {selectedTimer, tick} from '../../actions';
 
 class TimersContainer extends Component {
 
@@ -33,6 +34,10 @@ class TimersContainer extends Component {
                             );
                         })
                 }
+                <Ticker
+                    timers={this.props.timersPlaying}
+                    tick={this.props.tick}
+                />
             </SelectableList>
         );
     }
@@ -42,6 +47,10 @@ const mapStateToProps = state => {
     return {
         selectedTimer: state.selectedTimer,
         timers: state.timers,
+        timersPlaying: state.timers.filter((timer) => {
+            return timer.state === 'play' && timer.isTopLevel && !timer.childTimers;
+            // TODO: продумать логику с группами таймеров
+        }),
     }
 };
 
@@ -49,6 +58,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onSelectTimer: id => {
             dispatch(selectedTimer(id));
+        },
+        tick: ids => {
+            dispatch(tick(ids));
         },
     }
 };

@@ -43,7 +43,6 @@ function TimesVal(prop) {
 }
 
 class CurrentTimer extends Component {
-    // TODO: методы перенести в CurrentTimerContainer
 
     toggleState(state) {
       if (state === this.props.state) {
@@ -51,35 +50,6 @@ class CurrentTimer extends Component {
       }
 
       this.props[`${state}Timer`](this.props.id);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.state !== 'play' && this.props.state === 'play') {
-            this.tick();
-        }
-    }
-
-    async tick() {
-
-        if (this.props.state === 'stop' || this.props.state === 'pause') {
-            return;
-        }
-
-        if (this.props.left < 1) {
-            this.props.stopTimer(this.props.id);
-            return;
-        }
-
-        // TODO: перенести в reducer, посмотреть как сделать через middleware
-
-        await new Promise(resolve => {
-            setTimeout(() => {
-                resolve();
-            }, 1000);
-        });
-
-        this.props.tickTimer(this.props.id);
-        this.tick();
     }
 
     render() {
@@ -165,7 +135,6 @@ CurrentTimer.propTypes = {
     playTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
-    tickTimer: PropTypes.func.isRequired,
     ...timerShape};
 
 export default muiThemeable()(CurrentTimer);

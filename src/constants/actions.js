@@ -5,6 +5,7 @@ const ACTIONS = {
     PAUSE_TIMER: 'PAUSE_TIMER',
     STOP_TIMER: 'STOP_TIMER',
     TICK_TIMER: 'TICK_TIMER',
+    TICK: 'TICK',
 };
 
 export {ACTIONS};

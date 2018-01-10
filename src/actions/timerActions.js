@@ -67,16 +67,15 @@ export const stopTimer = id => {
     }
 };
 
-
 /**
- * @param {String|Number} id
- * @return {{type: string, payload: {id: String|Number}}}
+ * @param {String[]|Number[]} ids
+ * @return {{type: string, payload: {ids: String[]|Number[]}}}
  */
-export const tickTimer = id => {
+export const tick = ids => {
     return {
-        type: ACTIONS.TICK_TIMER,
+        type: ACTIONS.TICK,
         payload: {
-            id,
-        },
+            ids,
+        }
     }
 };

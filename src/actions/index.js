@@ -2,12 +2,12 @@ import {selectedTimer,
     playTimer,
     pauseTimer,
     stopTimer,
-    tickTimer,
+    tick,
 } from './timerActions';
 
 export {selectedTimer,
     playTimer,
     pauseTimer,
     stopTimer,
-    tickTimer,
+    tick,
 };
