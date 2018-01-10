@@ -9,9 +9,9 @@ import {selectedTimer} from '../../actions';
 
 class TimersContainer extends Component {
 
-    onSelectTimer = (timer) => {
+    onSelectTimer(timer) {
         this.props.onSelectTimer(timer.id);
-    };
+    }
 
     render() {
         return (

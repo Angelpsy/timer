@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -42,8 +43,55 @@ function TimesVal(prop) {
 }
 
 class CurrentTimer extends Component {
+    // TODO: методы перенести в CurrentTimerContainer
+
+    toggleState(state) {
+      if (state === this.props.state) {
+          return;
+      }
+
+      this.props[`${state}Timer`](this.props.id);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.state !== 'play' && this.props.state === 'play') {
+            this.tick();
+        }
+    }
+
+    async tick() {
+
+        if (this.props.state === 'stop' || this.props.state === 'pause') {
+            return;
+        }
+
+        if (this.props.left < 1) {
+            this.props.stopTimer(this.props.id);
+            return;
+        }
+
+        // TODO: перенести в reducer, посмотреть как сделать через middleware
+
+        await new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 1000);
+        });
+
+        this.props.tickTimer(this.props.id);
+        this.tick();
+    }
+
     render() {
-        const {id, title, description, childTimers, value, left, state} = this.props;
+        const {
+            id,
+            title,
+            description,
+            childTimers,
+            value,
+            left,
+            state
+        } = this.props;
         return (
             <div
                 className={'b-current-timer'}
@@ -65,16 +113,19 @@ class CurrentTimer extends Component {
                     <div className="b-current-timer__btns">
                         <Button
                             disabled={state === 'play'}
+                            onClick={this.toggleState.bind(this, 'play')}
                         >
                             <IconPlay style={iconStyles} />
                         </Button>
                         <Button
                             disabled={state !== 'play'}
+                            onClick={this.toggleState.bind(this, 'pause')}
                         >
                             <IconPause style={iconStyles} />
                         </Button>
                         <Button
                             disabled={state === 'stop'}
+                            onClick={this.toggleState.bind(this, 'stop')}
                         >
                             <IconStop style={iconStyles} />
                         </Button>
@@ -110,6 +161,11 @@ class CurrentTimer extends Component {
     }
 }
 
-CurrentTimer.propTypes = timerShape;
+CurrentTimer.propTypes = {
+    playTimer: PropTypes.func.isRequired,
+    pauseTimer: PropTypes.func.isRequired,
+    stopTimer: PropTypes.func.isRequired,
+    tickTimer: PropTypes.func.isRequired,
+    ...timerShape};
 
 export default muiThemeable()(CurrentTimer);

@@ -1,3 +1,13 @@
-import {selectedTimer} from './timerActions';
+import {selectedTimer,
+    playTimer,
+    pauseTimer,
+    stopTimer,
+    tickTimer,
+} from './timerActions';
 
-export {selectedTimer};
+export {selectedTimer,
+    playTimer,
+    pauseTimer,
+    stopTimer,
+    tickTimer,
+};

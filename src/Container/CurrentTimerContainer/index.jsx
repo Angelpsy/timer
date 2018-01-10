@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 import CurrentTimer from  '../../Components/CurrentTimer';
 
 import {timerShape} from '../../constants/propTypes';
-import {selectedTimer} from "../../actions";
+import {selectedTimer,
+    playTimer,
+    pauseTimer,
+    stopTimer,
+    tickTimer,
+} from "../../actions";
 
 class CurrentTimerContainer extends Component {
     render() {
@@ -13,6 +18,10 @@ class CurrentTimerContainer extends Component {
         return (
             <CurrentTimer
                 resetSelectTimer={this.props.resetSelectTimer}
+                playTimer={this.props.playTimer}
+                pauseTimer={this.props.pauseTimer}
+                stopTimer={this.props.stopTimer}
+                tickTimer={this.props.tickTimer}
                 {...this.props.selectedTimer}
             />
         );
@@ -33,7 +42,19 @@ const mapDispatchToProps = dispatch => {
     return {
         resetSelectTimer: () => {
             dispatch(selectedTimer(''));
-        }
+        },
+        playTimer: (id) => {
+            dispatch(playTimer(id));
+        },
+        pauseTimer: (id) => {
+            dispatch(pauseTimer(id));
+        },
+        stopTimer: (id) => {
+            dispatch(stopTimer(id));
+        },
+        tickTimer: (id) => {
+            dispatch(tickTimer(id));
+        },
     }
 };
 

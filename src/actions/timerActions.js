@@ -28,3 +28,55 @@ export const addTimer = timer => {
         },
     }
 };
+
+/**
+ * @param {String|Number} id
+ * @return {{type: string, payload: {id: String|Number}}}
+ */
+export const playTimer = id => {
+    return {
+        type: ACTIONS.PLAY_TIMER,
+        payload: {
+            id,
+        },
+    }
+};
+/**
+ * @param {String|Number} id
+ * @return {{type: string, payload: {id: String|Number}}}
+ */
+export const pauseTimer = id => {
+    return {
+        type: ACTIONS.PAUSE_TIMER,
+        payload: {
+            id,
+        },
+    }
+};
+
+/**
+ * @param {String|Number} id
+ * @return {{type: string, payload: {id: String|Number}}}
+ */
+export const stopTimer = id => {
+    return {
+        type: ACTIONS.STOP_TIMER,
+        payload: {
+            id,
+        },
+    }
+};
+
+
+/**
+ * @param {String|Number} id
+ * @return {{type: string, payload: {id: String|Number}}}
+ */
+export const tickTimer = id => {
+    return {
+        type: ACTIONS.TICK_TIMER,
+        payload: {
+            id,
+        },
+    }
+};

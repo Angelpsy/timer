@@ -41,8 +41,8 @@ let timers = [
         title: 'Timer 1',
         description: 'Description Timer 1',
         childTimers: null,
-        value: 100, // s
-        left: 100, // s
+        value: 5, // s
+        left: 5, // s
         state: 'stop', // ['stop', 'pause', 'play']
         isTopLevel: true,
     },
