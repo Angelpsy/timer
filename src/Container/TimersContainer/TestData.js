@@ -52,9 +52,20 @@ let timers = [
         title: 'Timer 2',
         description: 'Description Timer 2',
         childTimers: null,
-        value: 100, // s
-        left: 100, // s
+        value: 10, // s
+        left: 10, // s
         state: 'pause',
+        isTopLevel: true,
+    },
+    {
+        id: nanoid(),
+        order: 1,
+        title: 'Timer 2',
+        description: 'Description Timer 2',
+        childTimers: null,
+        value: 20, // s
+        left: 20, // s
+        state: 'play',
         isTopLevel: true,
     },
     {
@@ -63,8 +74,8 @@ let timers = [
         title: 'Timer 3',
         description: 'Description Timer 3',
         childTimers: null,
-        value: 100000, // s
-        left: 100, // s
+        value: 10, // s
+        left: 10, // s
         state: 'play',
         isTopLevel: true,
     },

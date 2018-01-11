@@ -61,17 +61,29 @@ const timers = (state = _timers, action) => {
             let newState = state.slice();
 
             action.payload.ids.forEach((id) => {
+                let isNeedPlayNextTimer = false;
                 newState = newState.map((timer) => {
                     if (timer.id === id && timer.left > 1) {
                         return {
                             ...timer,
                             left: timer.left - 1,
                         }
-                    } else if (timer.id === id && timer.left <= 1) {
-                        return stopTimer(timer);
-                    } else {
-                        return timer;
                     }
+
+                    if (timer.id === id && timer.left <= 1) {
+                        isNeedPlayNextTimer = true;
+                        return stopTimer(timer);
+                    }
+
+                    if (isNeedPlayNextTimer) {
+                        isNeedPlayNextTimer = false;
+                        return {
+                            ...timer,
+                            state: 'play',
+                        }
+                    }
+
+                    return timer;
                 });
             });
 
