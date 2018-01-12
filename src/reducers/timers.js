@@ -3,6 +3,23 @@ import nanoid from 'nanoid';
 
 import {timers as _timers} from '../Container/TimersContainer/TestData';
 
+// TODO: разобраться с группами таймеров
+/**
+ * @param {Object} timer
+ * @return {{left, state: string}}
+ */
+function playTimer(timer) {
+    return {
+        ...timer,
+        state: 'play',
+    }
+}
+
+// TODO: разобраться с группами таймеров
+/**
+ * @param {Object} timer
+ * @return {{left, state: string}}
+ */
 function stopTimer(timer) {
     return {
         ...timer,
@@ -30,10 +47,7 @@ const timers = (state = _timers, action) => {
         case ACTIONS.PLAY_TIMER:
             return state.map((timer) => {
                 if (action.payload.id === timer.id && timer.state !== 'play') {
-                    return {
-                        ...timer,
-                        state: 'play',
-                    }
+                    return playTimer(timer);
                 } else {
                     return timer;
                 }
