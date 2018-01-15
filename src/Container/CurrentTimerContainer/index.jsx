@@ -9,7 +9,7 @@ import {selectedTimer,
     playTimer,
     pauseTimer,
     stopTimer,
-} from "../../actions";
+} from '../../actionCreators';
 
 class CurrentTimerContainer extends Component {
     render() {

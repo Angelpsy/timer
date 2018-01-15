@@ -6,7 +6,7 @@ import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
 import Ticker from '../../Container/Ticker';
 
-import {selectedTimer, tick} from '../../actions';
+import {selectedTimer, tick} from '../../actionCreators';
 
 class TimersContainer extends Component {
 
