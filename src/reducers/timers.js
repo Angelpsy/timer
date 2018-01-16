@@ -1,7 +1,7 @@
 import {ACTIONS} from '../constants/actions';
 import nanoid from 'nanoid';
 
-import {timers as _timers} from '../Container/TimersContainer/TestData';
+import {timers as _timers} from '../store/TestData';
 
 // TODO: разобраться с группами таймеров
 /**

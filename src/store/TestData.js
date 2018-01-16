@@ -43,7 +43,7 @@ let timers = [
         childTimers: null,
         value: 5, // s
         left: 5, // s
-        state: 'stop', // ['stop', 'pause', 'play']
+        state: 'play', // ['stop', 'pause', 'play']
         isTopLevel: true,
     },
     {
@@ -52,9 +52,9 @@ let timers = [
         title: 'Timer 2',
         description: 'Description Timer 2',
         childTimers: null,
-        value: 10, // s
-        left: 10, // s
-        state: 'pause',
+        value: 15, // s
+        left: 15, // s
+        state: 'stop',
         isTopLevel: true,
     },
     {
