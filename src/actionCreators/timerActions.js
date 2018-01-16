@@ -34,11 +34,18 @@ export const addTimer = timer => {
  * @return {{type: string, payload: {id: String|Number}}}
  */
 export const playTimer = id => {
-    return {
-        type: ACTIONS.PLAY_TIMER,
-        payload: {
-            id,
-        },
+    return (dispatch, getState) => {
+        if (getState().timers.find(timer => timer.id === id).state === 'play' ) {
+            return;
+        }
+
+        dispatch(tick(id));
+        dispatch({
+            type: ACTIONS.PLAY_TIMER,
+            payload: {
+                id,
+            },
+        });
     }
 };
 /**
@@ -68,14 +75,51 @@ export const stopTimer = id => {
 };
 
 /**
- * @param {String[]|Number[]} ids
- * @return {{type: string, payload: {ids: String[]|Number[]}}}
+ * @param {String|Number} id
+ * @return {{type: string, payload: {id: String|Number}}}
  */
-export const tick = ids => {
+const _tick = id => {
     return {
         type: ACTIONS.TICK,
         payload: {
-            ids,
+            id,
         }
     }
+};
+
+/**
+ * @param {String|Number} id
+ * @return {function(*, *)}
+ */
+export const tick = id => {
+    return async (dispatch, getState) => {
+        await new Promise(resolve => setTimeout(resolve, 1000)); // pause 1000ms
+
+        // const timers = getState().timers;
+
+        // TODO временное решение, чтобы убрать группы таймеров
+        const timers = getState().timers;
+
+        const timer = timers.find(timer => timer.id === id);
+
+        if (!timer || timer.state !== 'play') {
+            return;
+        }
+
+        dispatch(_tick(timer.id));
+
+        if (timer.left > 1) {
+            dispatch(tick(timer.id));
+        } else {
+            dispatch(stopTimer(timer.id));
+
+            const timersInOneLevel = timers.filter(timer => timer.isTopLevel && !timer.childTimers);
+            const index = timersInOneLevel.findIndex(t => t === timer);
+
+            if (timersInOneLevel[index + 1]) {
+                dispatch(playTimer(timersInOneLevel[index + 1].id))
+            }
+        }
+
+    };
 };

@@ -43,7 +43,7 @@ let timers = [
         childTimers: null,
         value: 5, // s
         left: 5, // s
-        state: 'play', // ['stop', 'pause', 'play']
+        state: 'stop', // ['stop', 'pause', 'play']
         isTopLevel: true,
     },
     {
@@ -65,7 +65,7 @@ let timers = [
         childTimers: null,
         value: 20, // s
         left: 20, // s
-        state: 'play',
+        state: 'stop',
         isTopLevel: true,
     },
     {
@@ -76,7 +76,7 @@ let timers = [
         childTimers: null,
         value: 10, // s
         left: 10, // s
-        state: 'play',
+        state: 'stop',
         isTopLevel: true,
     },
     {
@@ -87,7 +87,7 @@ let timers = [
         childTimers: childTimers.map((timer => timer.id)),
         value: 1000, // s
         left: 100, // s
-        state: 'play',
+        state: 'stop',
         isTopLevel: true,
     },
 ];

@@ -73,33 +73,16 @@ const timers = (state = _timers, action) => {
             });
         case ACTIONS.TICK:
             let newState = state.slice();
-
-            action.payload.ids.forEach((id) => {
-                let isNeedPlayNextTimer = false;
                 newState = newState.map((timer) => {
-                    if (timer.id === id && timer.left > 1) {
+                    if (timer.id === action.payload.id) {
                         return {
                             ...timer,
                             left: timer.left - 1,
                         }
                     }
 
-                    if (timer.id === id && timer.left <= 1) {
-                        isNeedPlayNextTimer = true;
-                        return stopTimer(timer);
-                    }
-
-                    if (isNeedPlayNextTimer) {
-                        isNeedPlayNextTimer = false;
-                        return {
-                            ...timer,
-                            state: 'play',
-                        }
-                    }
-
                     return timer;
                 });
-            });
 
             return newState;
         default:

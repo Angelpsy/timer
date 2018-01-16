@@ -33,8 +33,8 @@ function TimesVal(prop) {
     const minutes = Math.floor((prop.val - hours*60*60) / 60);
     const seconds = prop.val - hours*60*60 - minutes*60;
     const output = `${hours > 0 ? hours + 'h:' : ''}
-                    ${minutes > 10 ? minutes : '0' + minutes}m:
-                    ${seconds > 10 ? seconds : '0' + seconds}s`;
+                    ${minutes >= 10 ? minutes : '0' + minutes}m:
+                    ${seconds >= 10 ? seconds : '0' + seconds}s`;
     return (
         <div {...prop} className={classNames} >
             {output}
