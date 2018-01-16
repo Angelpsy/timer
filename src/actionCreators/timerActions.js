@@ -1,5 +1,25 @@
 import {ACTIONS} from '../constants/actions';
 
+import {timers as testData} from '../store/TestData';
+
+const requestTimers = async () => {
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    // TODO: после реализации добавления\удаления таймеров - реализовать загрузку из localStorage
+    return testData;
+};
+
+export const getTimers = () => {
+    return async dispatch => {
+        const timers = await requestTimers();
+        dispatch({
+            type: ACTIONS.GET_TIMERS,
+            payload: {
+                timers,
+            }
+        });
+    }
+};
+
 
 /**
  * @param {String|Number} id

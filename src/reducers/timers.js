@@ -28,8 +28,10 @@ function stopTimer(timer) {
     }
 }
 
-const timers = (state = _timers, action) => {
+const timers = (state = [], action) => {
     switch (action.type) {
+        case ACTIONS.GET_TIMERS:
+            return action.payload.timers;
         case ACTIONS.ADD_TIMER:
             return [
                 ...state,
