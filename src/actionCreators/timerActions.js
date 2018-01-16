@@ -3,7 +3,7 @@ import {ACTIONS} from '../constants/actions';
 import {timers as testData} from '../store/TestData';
 
 const requestTimers = async () => {
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 500));
     // TODO: после реализации добавления\удаления таймеров - реализовать загрузку из localStorage
     return testData;
 };

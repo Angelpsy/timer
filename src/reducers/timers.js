@@ -31,7 +31,14 @@ function stopTimer(timer) {
 const timers = (state = [], action) => {
     switch (action.type) {
         case ACTIONS.GET_TIMERS:
-            return action.payload.timers;
+            return action.payload.timers.map(timer => {
+                return timer.state === 'play' ?
+                    {
+                        ...timer,
+                        state: 'pause',
+                    }
+                    : timer
+            });
         case ACTIONS.ADD_TIMER:
             return [
                 ...state,
