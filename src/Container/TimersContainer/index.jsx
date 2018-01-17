@@ -25,6 +25,7 @@ class TimersContainer extends Component {
                         .map((timer) => {
                             return (
                                 <ListItem
+                                    value={timer.id}
                                     key={timer.id}
                                     onClick={this.onSelectTimer.bind(this, timer)}
                                 >

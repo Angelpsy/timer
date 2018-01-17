@@ -23,7 +23,7 @@ const timer = (state = {}, action) => {
                 state: 'stop',
             };
         case ACTIONS.PLAY_TIMER:
-            if (action.payload.id === state.id && state.state !== 'play') {
+            if (state.state !== 'play') {
                 return {
                     ...state,
                     state: 'play',
@@ -32,7 +32,7 @@ const timer = (state = {}, action) => {
                 return state;
             }
         case ACTIONS.PAUSE_TIMER:
-            if (action.payload.id === state.id && state.state !== 'pause') {
+            if (state.state !== 'pause') {
                 return {
                     ...state,
                     state: 'pause',
@@ -42,7 +42,7 @@ const timer = (state = {}, action) => {
             }
 
         case ACTIONS.STOP_TIMER:
-            if (action.payload.id === state.id && state.state !== 'stop') {
+            if (state.state !== 'stop') {
                 return {
                     ...state,
                     left: state.value,
@@ -52,14 +52,10 @@ const timer = (state = {}, action) => {
                 return state;
             }
         case ACTIONS.TICK:
-            if (state.id === action.payload.id) {
-                return {
-                    ...state,
-                    left: state.left - 1,
-                }
-            } else {
-                return state;
-            }
+            return {
+                ...state,
+                left: state.left - 1,
+            };
         default:
             return state;
     }

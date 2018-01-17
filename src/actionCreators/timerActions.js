@@ -42,9 +42,7 @@ export const resortTimers = (timers) => {
 export const selectedTimer = id => {
     return {
         type: ACTIONS.SELECTED_TIMER,
-        payload: {
-            id,
-        },
+        id,
     }
 };
 
@@ -81,9 +79,7 @@ export const playTimer = id => {
         dispatch(tick(id));
         dispatch({
             type: ACTIONS.PLAY_TIMER,
-            payload: {
-                id,
-            },
+            id,
         });
     }
 };
@@ -94,9 +90,7 @@ export const playTimer = id => {
 export const pauseTimer = id => {
     return {
         type: ACTIONS.PAUSE_TIMER,
-        payload: {
-            id,
-        },
+        id,
     }
 };
 
@@ -107,9 +101,7 @@ export const pauseTimer = id => {
 export const stopTimer = id => {
     return {
         type: ACTIONS.STOP_TIMER,
-        payload: {
-            id,
-        },
+        id,
     }
 };
 
@@ -120,9 +112,7 @@ export const stopTimer = id => {
 const _tick = id => {
     return {
         type: ACTIONS.TICK,
-        payload: {
-            id,
-        }
+        id,
     }
 };
 

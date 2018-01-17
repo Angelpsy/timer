@@ -5,6 +5,8 @@ import timer from './timer';
 
 const byId = (state = {}, action) => {
     switch (action.type) {
+
+        // TODO: вынести в отдельную функцию, с возможностью переиспользовать в ADD_TIMER и RESORT_TIMERS
         case ACTIONS.GET_TIMERS:
             const _obj1 = {};
 
@@ -48,7 +50,7 @@ const byId = (state = {}, action) => {
         case ACTIONS.TICK:
             return {
                 ...state,
-                [action.payload.id]: timer(state[action.payload.id], action),
+                [action.id]: timer(state[action.id], action),
             };
         default:
             return state
