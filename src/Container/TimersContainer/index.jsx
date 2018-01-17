@@ -5,7 +5,8 @@ import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
 
-import {selectedTimer, tick} from '../../actionCreators';
+import {selectedTimer} from '../../actionCreators';
+import {getAllTimers} from '../../reducers';
 
 class TimersContainer extends Component {
 
@@ -24,7 +25,6 @@ class TimersContainer extends Component {
                         .map((timer) => {
                             return (
                                 <ListItem
-                                    value={timer.id}
                                     key={timer.id}
                                     onClick={this.onSelectTimer.bind(this, timer)}
                                 >
@@ -41,7 +41,7 @@ class TimersContainer extends Component {
 const mapStateToProps = state => {
     return {
         selectedTimer: state.selectedTimer,
-        timers: state.timers,
+        timers: getAllTimers(state),
     }
 };
 

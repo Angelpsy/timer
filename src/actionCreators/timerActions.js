@@ -1,4 +1,5 @@
 import {ACTIONS} from '../constants/actions';
+import {getAllTimers} from '../reducers';
 
 import {timers as testData} from '../store/TestData';
 
@@ -20,6 +21,19 @@ export const getTimers = () => {
     }
 };
 
+/**
+ * Run after added, deleted timers and changed order of one timer
+ * @param {{byId: Object, allIds: Array}} timers (normalized timers)
+ * @return {{type: string, payload: {timers: {byId: Object, allIds: Array}}}}
+ */
+export const resortTimers = (timers) => {
+    return {
+        type: ACTIONS.GET_TIMERS,
+        payload: {
+            timers: timers,
+        }
+    }
+};
 
 /**
  * @param {String|Number} id
@@ -55,7 +69,12 @@ export const addTimer = timer => {
  */
 export const playTimer = id => {
     return (dispatch, getState) => {
-        if (getState().timers.findIndex(timer => timer.state === 'play') !== -1) {
+        if (getAllTimers(getState()).findIndex(timer => timer.state === 'play') !== -1) {
+            return;
+        }
+
+        // TODO: временный запрет за запуск групп таймеров
+        if (getState().timers.byId[id].childTimers) {
             return;
         }
 
@@ -115,12 +134,7 @@ export const tick = id => {
     return async (dispatch, getState) => {
         await new Promise(resolve => setTimeout(resolve, 1000)); // pause 1000ms
 
-        // const timers = getState().timers;
-
-        // TODO временное решение, чтобы убрать группы таймеров
-        const {timers} = getState();
-
-        const timer = timers.find(timer => timer.id === id);
+        const timer = getState().timers.byId[id];
 
         if (!timer || timer.state !== 'play') {
             return;
@@ -133,11 +147,8 @@ export const tick = id => {
         } else {
             dispatch(stopTimer(timer.id));
 
-            const timersInOneLevel = timers.filter(timer => timer.isTopLevel && !timer.childTimers);
-            const index = timersInOneLevel.findIndex(t => t === timer);
-
-            if (timersInOneLevel[index + 1]) {
-                dispatch(playTimer(timersInOneLevel[index + 1].id))
+            if (timer.next) {
+                dispatch(playTimer(timer.next))
             }
         }
 

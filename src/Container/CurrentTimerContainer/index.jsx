@@ -32,7 +32,7 @@ class CurrentTimerContainer extends Component {
 // TODO: продумать как передавать value group timer
 const mapStateToProps = state => {
     return {
-        selectedTimer: state.selectedTimer ? state.timers.find(timer => timer.id === state.selectedTimer) : null,
+        selectedTimer: state.selectedTimer ? state.timers.byId[state.selectedTimer] : null,
     }
 };
 
