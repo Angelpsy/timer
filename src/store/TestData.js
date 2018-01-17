@@ -36,7 +36,7 @@ const childTimers = [
 
 let timers = [
     {
-        id: nanoid(),
+        id: 1,
         order: 0,
         title: 'Timer 1',
         description: 'Description Timer 1',
@@ -53,18 +53,18 @@ let timers = [
         description: 'Description Timer 2',
         childTimers: null,
         value: 15, // s
-        left: 15, // s
-        state: 'stop',
+        left: 10, // s
+        state: 'play',
         isTopLevel: true,
     },
     {
-        id: nanoid(),
+        id: 2,
         order: 1,
         title: 'Timer 2',
         description: 'Description Timer 2',
         childTimers: null,
-        value: 20, // s
-        left: 20, // s
+        value: 15, // s
+        left: 15, // s
         state: 'stop',
         isTopLevel: true,
     },

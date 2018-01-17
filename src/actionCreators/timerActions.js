@@ -55,7 +55,7 @@ export const addTimer = timer => {
  */
 export const playTimer = id => {
     return (dispatch, getState) => {
-        if (getState().timers.find(timer => timer.id === id).state === 'play' ) {
+        if (getState().timers.findIndex(timer => timer.state === 'play') !== -1) {
             return;
         }
 
@@ -118,7 +118,7 @@ export const tick = id => {
         // const timers = getState().timers;
 
         // TODO временное решение, чтобы убрать группы таймеров
-        const timers = getState().timers;
+        const {timers} = getState();
 
         const timer = timers.find(timer => timer.id === id);
 

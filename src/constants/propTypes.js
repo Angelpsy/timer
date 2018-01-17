@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 
 export const timerShape = {
-    id: PropTypes.string,
+    id: PropTypes.oneOfType(
+    [
+        PropTypes.string,
+        PropTypes.number,
+    ]),
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     value: PropTypes.number.isRequired,
