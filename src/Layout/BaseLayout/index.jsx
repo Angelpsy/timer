@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import './index.css';
 
 import muiThemeable from 'material-ui/styles/muiThemeable';
@@ -7,6 +6,7 @@ import Navbar from '../../Components/Navbar';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import TimersContainer from '../../Container/TimersContainer';
+import Player from '../../Container/PlayerContainer';
 
 class BaseLayout extends Component {
     render() {
@@ -29,6 +29,7 @@ class BaseLayout extends Component {
 
                 </main>
                 <Footer className={'l-base__footer'}/>
+                <Player />
             </div>
         );
     }

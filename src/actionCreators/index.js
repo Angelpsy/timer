@@ -10,3 +10,8 @@ export {
     stopTimer,
     tick,
 } from './timerActions';
+
+export {
+    startAudio,
+    stopAudio,
+} from './audio';

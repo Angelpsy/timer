@@ -143,6 +143,15 @@ module.exports = {
                             name: 'static/media/[name].[hash:8].[ext]',
                         },
                     },
+                    // Audio files
+                    {
+                        test: [/\.mp3$/, /\.ogg$/],
+                        loader: require.resolve('url-loader'),
+                        options: {
+                            limit: 10000,
+                            name: 'static/audio/[name].[hash:8].[ext]',
+                        },
+                    },
                     // Process JS with Babel.
                     {
                         test: /\.(js|jsx|mjs)$/,

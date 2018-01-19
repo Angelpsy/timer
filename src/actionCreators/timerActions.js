@@ -63,9 +63,10 @@ export const addTimer = timer => {
 
 /**
  * @param {String|Number} id
+ * @param {Boolean} isNext
  * @return {{type: string, payload: {id: String|Number}}}
  */
-export const playTimer = id => {
+export const playTimer = (id, isNext) => {
     return (dispatch, getState) => {
         if (getAllTimers(getState()).findIndex(timer => timer.state === 'play') !== -1) {
             return;
@@ -76,12 +77,31 @@ export const playTimer = id => {
             return;
         }
 
+        // // TODO: убрать отдельный action - запускать в reducer audio по action.play_timer
+        // // продумать как запускать не по первому play (возможно ввести action.play_next_timer)
+        //  if (isNext) {
+        //      dispatch(startAudio('start'));
+        //  }
+
         dispatch(tick(id));
         dispatch({
             type: ACTIONS.PLAY_TIMER,
             id,
         });
+
+        if (isNext) {
+            dispatch(playNextTimer());
+        }
     }
+};
+
+/**
+ * @return {{type: string, payload: {id: String|Number}}}
+ */
+export const playNextTimer = () => {
+    return ({
+        type: ACTIONS.PLAY_NEXT_TIMER,
+    })
 };
 /**
  * @param {String|Number} id
@@ -99,10 +119,14 @@ export const pauseTimer = id => {
  * @return {{type: string, payload: {id: String|Number}}}
  */
 export const stopTimer = id => {
-    return {
-        type: ACTIONS.STOP_TIMER,
-        id,
-    }
+    return (dispatch) => {
+        // dispatch(startAudio('stop'));
+        // TODO: убрать отдельный action - запускать в reducer audio по action.stop_timer
+        dispatch({
+            type: ACTIONS.STOP_TIMER,
+            id,
+        });
+    };
 };
 
 /**
@@ -138,7 +162,7 @@ export const tick = id => {
             dispatch(stopTimer(timer.id));
 
             if (timer.next) {
-                dispatch(playTimer(timer.next))
+                dispatch(playTimer(timer.next, true));
             }
         }
 
