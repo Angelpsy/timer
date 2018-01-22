@@ -9,6 +9,8 @@ import IconPlay from 'material-ui/svg-icons/av/play-arrow';
 import IconPause from 'material-ui/svg-icons/av/pause';
 import IconStop from 'material-ui/svg-icons/av/stop';
 
+import TimeVal from '../TimeVal';
+
 import './index.css';
 import {timerShape} from '../../constants/propTypes';
 
@@ -30,27 +32,6 @@ function Button(props) {
         mini={true}
         style={buttonStyles}
         {...props}/>;
-}
-
-// TODO: вынести в helper, принимает секунды, возвращает объект {h, m, s}
-// TODO: дополнительно реализовать функциональный компонент, полностью аналогичный функции TimesVal
-/**
- * @param {{className: String, val: Number}} prop
- * @return {JSX}
- */
-function TimesVal(prop) {
-    const classNames = `b-current-timer__time-val ${prop.className}`;
-    const hours = Math.floor(prop.val / (60*60));
-    const minutes = Math.floor((prop.val - hours*60*60) / 60);
-    const seconds = prop.val - hours*60*60 - minutes*60;
-    const output = `${hours > 0 ? hours + 'h:' : ''}
-                    ${minutes >= 10 ? minutes : '0' + minutes}m:
-                    ${seconds >= 10 ? seconds : '0' + seconds}s`;
-    return (
-        <div {...prop} className={classNames} >
-            {output}
-        </div>
-    );
 }
 
 class CurrentTimer extends Component {
@@ -112,16 +93,17 @@ class CurrentTimer extends Component {
                     </div>
 
                     <div className="b-current-timer__times">
-                        <TimesVal
-                            className="b-current-timer__left"
+                        <TimeVal
+                            className="b-current-timer__val"
+                            isshort={1}
                             val={left}
                             style={{
                                 color: this.props.muiTheme.palette.accent1Color,
                                 opacity: left !== value ? 1 : 0,
                             }}
                         />
-                        <TimesVal
-                            className="b-current-timer__value"
+                        <TimeVal
+                            className="b-current-timer__val"
                             val={value}
                             style={{
                                 color: this.props.muiTheme.palette.primary1Color,

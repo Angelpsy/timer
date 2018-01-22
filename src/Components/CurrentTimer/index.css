@@ -15,7 +15,7 @@
     align-items: flex-end;
 }
 
-.b-current-timer__time-val {
+.b-current-timer__val {
     text-align: right;
     font-size: 1.25em;
     padding: 2.5px 0;
