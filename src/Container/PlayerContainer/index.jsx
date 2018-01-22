@@ -7,6 +7,10 @@ import audioStartMp3 from './audio/soft.mp3';
 import audioStopOgg from './audio/double_beebeep.ogg';
 import audioStartOgg from './audio/soft.ogg';
 
+/**
+ * @class
+ * @classdesc Component for player sound, no display
+ */
 class Player extends Component {
     render() {
         return (
@@ -28,20 +32,28 @@ class Player extends Component {
     }
 }
 
+/**
+ * @param {{audio: {type: String, isPlay: Boolean}}} state
+ * @return {{audioType: String, isPlayAudio: boolean}}
+ */
 const mapStateToProps = state => {
     return {
         // audioSrc: state.audio.src,
         audioType: state.audio.type,
         isPlayAudio: state.audio.isPlay,
-    }
+    };
 };
 
+/**
+ * @param {Function} dispatch
+ * @return {{onStopAudio: function()}}
+ */
 const mapDispatchToProps = dispatch => {
     return {
         onStopAudio: () => {
             dispatch(stopAudio());
         },
-    }
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

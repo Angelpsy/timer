@@ -2,6 +2,11 @@ import {ACTIONS} from '../constants/actions';
 import nanoid from 'nanoid';
 
 // TODO: разобраться с группами таймеров
+/**
+ * @param {Object} state
+ * @param {{type: String}} action
+ * @return {state}
+ */
 const timer = (state = {}, action) => {
     switch (action.type) {
         case ACTIONS.GET_TIMERS:

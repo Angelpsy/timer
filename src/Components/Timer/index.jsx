@@ -5,12 +5,11 @@ import './index.css';
 import SoloTimer from './SoloTimer';
 
 class Timer extends Component {
-
     render() {
         const {childTimers} = this.props;
 
         if (!childTimers || childTimers.length === 0) {
-            return <SoloTimer {...this.props}/>
+            return <SoloTimer {...this.props}/>;
         } else {
             // TODO: timerGroup
             return (

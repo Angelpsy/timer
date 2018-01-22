@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import CurrentTimer from  '../../Components/CurrentTimer';
+import CurrentTimer from '../../Components/CurrentTimer';
 
 import {timerShape} from '../../constants/propTypes';
 import {selectedTimer,
@@ -30,27 +30,40 @@ class CurrentTimerContainer extends Component {
 }
 
 // TODO: продумать как передавать value group timer
+/**
+ * @param {{selectedTimer: String, timers: {byId: Object}}} state
+ * @return {{selectedTimer: null}}
+ */
 const mapStateToProps = state => {
     return {
         selectedTimer: state.selectedTimer ? state.timers.byId[state.selectedTimer] : null,
-    }
+    };
 };
 
+/**
+ * @param {Function} dispatch
+ * @return {{
+ *      resetSelectTimer: function(),
+ *      playTimer: function(id: String),
+ *      pauseTimer: function(id: String),
+ *      stopTimer: function(id: String)
+ * }}
+ */
 const mapDispatchToProps = dispatch => {
     return {
         resetSelectTimer: () => {
             dispatch(selectedTimer(''));
         },
-        playTimer: (id) => {
+        playTimer: id => {
             dispatch(playTimer(id));
         },
-        pauseTimer: (id) => {
+        pauseTimer: id => {
             dispatch(pauseTimer(id));
         },
-        stopTimer: (id) => {
+        stopTimer: id => {
             dispatch(stopTimer(id));
         },
-    }
+    };
 };
 
 CurrentTimerContainer.propTypes = {

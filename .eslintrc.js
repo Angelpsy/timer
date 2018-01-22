@@ -11,6 +11,8 @@ module.exports = {
         'sourceType': 'module',
     },
     'extends': [
+        'eslint:recommended',
+        'google',
         'react-app',
     ],
     'rules': {
@@ -19,6 +21,20 @@ module.exports = {
             'comments': 120,
         }],
         'no-console': 'warn',
+        'arrow-parens': [
+            2,
+            'as-needed',
+        ],
+        'require-jsdoc': ['error', {
+            'require': {
+                'FunctionDeclaration': true,
+                'MethodDefinition': false,
+                'ClassDeclaration': false,
+                'ArrowFunctionExpression': true,
+                'FunctionExpression': true,
+            },
+        }],
+        'linebreak-style': 0,
     },
     'globals': {
         'env': true,

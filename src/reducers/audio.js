@@ -1,5 +1,10 @@
 import {ACTIONS} from '../constants/actions';
 
+/**
+ * @param {{isPlay: Boolean, type: String}} state
+ * @param {{type: String}} action
+ * @return {*}
+ */
 const audio = (state = {}, action) => {
     switch (action.type) {
         case ACTIONS.PLAY_NEXT_TIMER:
@@ -20,7 +25,7 @@ const audio = (state = {}, action) => {
                 isPlay: false,
             };
         default:
-            return state
+            return state;
     }
 };
 

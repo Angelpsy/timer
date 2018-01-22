@@ -3,12 +3,18 @@ import {getAllTimers} from '../reducers';
 
 import {timers as testData} from '../store/TestData';
 
+/**
+ * @return {Promise<void>}
+ */
 const requestTimers = async () => {
     await new Promise(resolve => setTimeout(resolve, 500));
     // TODO: после реализации добавления\удаления таймеров - реализовать загрузку из localStorage
     return testData;
 };
 
+/**
+ * @return {function(*)}
+ */
 export const getTimers = () => {
     return async dispatch => {
         const timers = await requestTimers();
@@ -16,9 +22,9 @@ export const getTimers = () => {
             type: ACTIONS.GET_TIMERS,
             payload: {
                 timers,
-            }
+            },
         });
-    }
+    };
 };
 
 /**
@@ -26,24 +32,24 @@ export const getTimers = () => {
  * @param {{byId: Object, allIds: Array}} timers (normalized timers)
  * @return {{type: string, payload: {timers: {byId: Object, allIds: Array}}}}
  */
-export const resortTimers = (timers) => {
+export const resortTimers = timers => {
     return {
         type: ACTIONS.GET_TIMERS,
         payload: {
             timers: timers,
-        }
-    }
+        },
+    };
 };
 
 /**
- * @param {String|Number} id
- * @return {{type: string, payload: {id: String|Number}}}
+ * @param {String} id
+ * @return {{type: string, payload: {id: String}}}
  */
 export const selectedTimer = id => {
     return {
         type: ACTIONS.SELECTED_TIMER,
         id,
-    }
+    };
 };
 
 /**
@@ -58,13 +64,13 @@ export const addTimer = timer => {
             description: timer.description,
             value: timer.value,
         },
-    }
+    };
 };
 
 /**
- * @param {String|Number} id
+ * @param {String} id
  * @param {Boolean} isNext
- * @return {{type: string, payload: {id: String|Number}}}
+ * @return {{type: string, payload: {id: String}}}
  */
 export const playTimer = (id, isNext) => {
     return (dispatch, getState) => {
@@ -92,34 +98,35 @@ export const playTimer = (id, isNext) => {
         if (isNext) {
             dispatch(playNextTimer());
         }
-    }
+    };
 };
 
 /**
- * @return {{type: string, payload: {id: String|Number}}}
+ * @return {{type: string, payload: {id: String}}}
  */
 export const playNextTimer = () => {
     return ({
         type: ACTIONS.PLAY_NEXT_TIMER,
-    })
+    });
 };
+
 /**
- * @param {String|Number} id
- * @return {{type: string, payload: {id: String|Number}}}
+ * @param {String} id
+ * @return {{type: string, payload: {id: String}}}
  */
 export const pauseTimer = id => {
     return {
         type: ACTIONS.PAUSE_TIMER,
         id,
-    }
+    };
 };
 
 /**
- * @param {String|Number} id
- * @return {{type: string, payload: {id: String|Number}}}
+ * @param {String} id
+ * @return {{type: string, payload: {id: String}}}
  */
 export const stopTimer = id => {
-    return (dispatch) => {
+    return dispatch => {
         // dispatch(startAudio('stop'));
         // TODO: убрать отдельный action - запускать в reducer audio по action.stop_timer
         dispatch({
@@ -130,18 +137,19 @@ export const stopTimer = id => {
 };
 
 /**
- * @param {String|Number} id
- * @return {{type: string, payload: {id: String|Number}}}
+ * @param {String} id
+ * @return {{type: String, id: String}}
+ * @private
  */
 const _tick = id => {
     return {
         type: ACTIONS.TICK,
         id,
-    }
+    };
 };
 
 /**
- * @param {String|Number} id
+ * @param {String} id
  * @return {function(*, *)}
  */
 export const tick = id => {
@@ -165,6 +173,5 @@ export const tick = id => {
                 dispatch(playTimer(timer.next, true));
             }
         }
-
     };
 };

@@ -2,8 +2,8 @@ import nanoid from 'nanoid';
 
 const childTimers = [
     {
-        id: nanoid(),
-        order: 0,
+        id: 41,
+        order: 1,
         title: 'Timer 41',
         description: 'Description Timer 41',
         childTimers: null,
@@ -12,8 +12,8 @@ const childTimers = [
         state: 'stop', // ['stop', 'pause', 'play']
     },
     {
-        id: nanoid(),
-        order: 1,
+        id: 42,
+        order: 2,
         title: 'Timer 42',
         description: 'Description Timer 42',
         childTimers: null,
@@ -22,9 +22,19 @@ const childTimers = [
         state: 'pause',
     },
     {
-        id: nanoid(),
-        order: 1,
+        id: 43,
+        order: 3,
         title: 'Timer 43',
+        description: 'Description Timer 43',
+        childTimers: null,
+        value: 1000, // s
+        left: 100, // s
+        state: 'play',
+    },
+    {
+        id: 44,
+        order: 3,
+        title: 'Timer 431',
         description: 'Description Timer 43',
         childTimers: null,
         value: 1000, // s
@@ -33,11 +43,54 @@ const childTimers = [
     },
 ];
 
+// const childTimers2 = [
+//     {
+//         id: 21,
+//         order: 1,
+//         title: 'Timer 241',
+//         description: 'Description Timer 41',
+//         childTimers: null,
+//         value: 100, // s
+//         left: 100, // s
+//         state: 'stop', // ['stop', 'pause', 'play']
+//     },
+//     {
+//         id: 22,
+//         order: 2,
+//         title: 'Timer 242',
+//         description: 'Description Timer 42',
+//         childTimers: null,
+//         value: 100, // s
+//         left: 100, // s
+//         state: 'pause',
+//     },
+//     {
+//         id: 23,
+//         order: 3,
+//         title: 'Timer 23',
+//         description: 'Description Timer 43',
+//         childTimers: null,
+//         value: 1000, // s
+//         left: 100, // s
+//         state: 'play',
+//     },
+//     {
+//         id: 24,
+//         order: 3,
+//         title: 'Timer 231',
+//         description: 'Description Timer 43',
+//         childTimers: null,
+//         value: 1000, // s
+//         left: 100, // s
+//         state: 'play',
+//     },
+// ];
+
 
 let timers = [
     {
         id: 1,
-        order: 0,
+        order: 2,
         title: 'Timer 1',
         description: 'Description Timer 1',
         childTimers: null,
@@ -47,7 +100,7 @@ let timers = [
         isTopLevel: true,
     },
     {
-        id: nanoid(),
+        id: 2,
         order: 1,
         title: 'Timer 2',
         description: 'Description Timer 2',
@@ -58,19 +111,8 @@ let timers = [
         isTopLevel: true,
     },
     {
-        id: 2,
-        order: 1,
-        title: 'Timer 2',
-        description: 'Description Timer 2',
-        childTimers: null,
-        value: 15, // s
-        left: 15, // s
-        state: 'stop',
-        isTopLevel: true,
-    },
-    {
-        id: nanoid(),
-        order: 1,
+        id: 3,
+        order: 0,
         title: 'Timer 3',
         description: 'Description Timer 3',
         childTimers: null,
@@ -80,8 +122,8 @@ let timers = [
         isTopLevel: true,
     },
     {
-        id: nanoid(),
-        order: 4,
+        id: 4,
+        order: 3,
         title: 'Timer 4',
         description: 'Description Timer 4',
         childTimers: childTimers.map((timer => timer.id)),

@@ -7,7 +7,14 @@ import CurrentTimerContainer from '../../Container/CurrentTimerContainer';
 
 import './index.css';
 
+/**
+ * @class
+ * @classdesc Component for footer app
+ */
 class Footer extends Component {
+    /**
+     * @return {jsx}
+     */
     render() {
         const footerClass = `b-footer ${this.props.className}`;
         return (

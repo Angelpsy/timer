@@ -8,7 +8,14 @@ import Footer from '../../Components/Footer';
 import TimersContainer from '../../Container/TimersContainer';
 import Player from '../../Container/PlayerContainer';
 
+/**
+ * @class
+ * @classdesc component for base layout app. No state, props
+ */
 class BaseLayout extends Component {
+    /**
+     * @return {jsx}
+     */
     render() {
         return (
             <div className='l-base'
@@ -22,7 +29,7 @@ class BaseLayout extends Component {
                     <div className='l-base__timer-list'>
                         <TimersContainer
                             style={{
-                                overflowY: 'auto'
+                                overflowY: 'auto',
                             }}
                         />
                     </div>

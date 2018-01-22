@@ -10,11 +10,11 @@ import BaseLayout from './Layout/BaseLayout';
 import Preloader from './Components/Preloader';
 
 import color from './constants/colors';
-import {appInit} from "./actionCreators";
+import {appInit} from './actionCreators';
 
 const muiTheme = getMuiTheme(baseTheme);
 
-muiTheme.palette = { ...muiTheme.palette, ...color};
+muiTheme.palette = {...muiTheme.palette, ...color};
 
 class App extends Component {
     componentWillMount() {
@@ -34,18 +34,26 @@ class App extends Component {
     }
 }
 
+/**
+ * @param {{app: {init: Boolean}}} state
+ * @return {{preloader: boolean}}
+ */
 const mapStateToProps = state => {
     return {
         preloader: !state.app.init,
-    }
+    };
 };
 
+/**
+ * @param {Function} dispatch
+ * @return {{initApp: function()}}
+ */
 const mapDispatchToProps = dispatch => {
     return {
         initApp: () => {
             dispatch(appInit());
         },
-    }
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

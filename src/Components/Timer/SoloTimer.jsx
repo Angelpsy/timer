@@ -8,7 +8,7 @@ import IconPause from 'material-ui/svg-icons/av/pause';
 import IconStop from 'material-ui/svg-icons/av/stop';
 
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import {timerShape} from "../../constants/propTypes";
+import {timerShape} from '../../constants/propTypes';
 
 const buttonStyles = {
     marginRight: 24,
@@ -25,11 +25,17 @@ const iconEmum = {
 };
 
 
-
 class Timer extends Component {
-
     render() {
-        const {id, title, description, childTimers, value, left, state} = this.props;
+        const {
+            // id,
+            title,
+            // description,
+            // childTimers,
+            value,
+            left,
+            state,
+        } = this.props;
 
         const IconState = iconEmum[state];
 
@@ -60,12 +66,12 @@ class Timer extends Component {
 
                     <div className="b-timer__values" style={{
                         color: this.props.muiTheme.palette.textSecondary,
-                        fontSize: '1.75em'
+                        fontSize: '1.75em',
                     }}>
                         {state !== 'stop' ?
                             <span className="b-timer__left"
                                   style={{
-                                      fontSize: '1.1em'
+                                      fontSize: '1.1em',
                                   }}
                             >{left}s /</span>
                             : null}

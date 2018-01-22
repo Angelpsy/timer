@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 import {List, makeSelectable} from 'material-ui/List';
 
+/**
+ * @param {JSX} ComposedComponent
+ * @return {SelectableList}
+ */
 function wrapState(ComposedComponent) {
     return class SelectableList extends Component {
         static propTypes = {

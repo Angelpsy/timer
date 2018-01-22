@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import IconButton from 'material-ui/IconButton';
-import IconClose from 'material-ui/svg-icons/navigation/close';
+// import IconButton from 'material-ui/IconButton';
+// import IconClose from 'material-ui/svg-icons/navigation/close';
 import IconPlay from 'material-ui/svg-icons/av/play-arrow';
 import IconPause from 'material-ui/svg-icons/av/pause';
 import IconStop from 'material-ui/svg-icons/av/stop';
 
 import './index.css';
-import {timerShape} from "../../constants/propTypes";
+import {timerShape} from '../../constants/propTypes';
 
 const buttonStyles = {
     marginRight: 12,
@@ -20,13 +20,24 @@ const iconStyles = {
     width: '75%',
 };
 
+/**
+ * @param {Object} props
+ * @return {JSX}
+ * @constructor
+ */
 function Button(props) {
     return <FloatingActionButton
         mini={true}
         style={buttonStyles}
-        {...props}/>
+        {...props}/>;
 }
 
+// TODO: вынести в helper, принимает секунды, возвращает объект {h, m, s}
+// TODO: дополнительно реализовать функциональный компонент, полностью аналогичный функции TimesVal
+/**
+ * @param {{className: String, val: Number}} prop
+ * @return {JSX}
+ */
 function TimesVal(prop) {
     const classNames = `b-current-timer__time-val ${prop.className}`;
     const hours = Math.floor(prop.val / (60*60));
@@ -43,7 +54,6 @@ function TimesVal(prop) {
 }
 
 class CurrentTimer extends Component {
-
     toggleState(state) {
       if (state === this.props.state) {
           return;
@@ -54,13 +64,13 @@ class CurrentTimer extends Component {
 
     render() {
         const {
-            id,
+            // id,
             title,
-            description,
+            // description,
             childTimers,
             value,
             left,
-            state
+            state,
         } = this.props;
         return (
             <div
@@ -120,12 +130,12 @@ class CurrentTimer extends Component {
                     </div>
                 </div>
 
-                {/*<IconButton key={'icon'}*/}
-                            {/*className={'b-footer__close'} // TODO: заменить класс и  переместить стили*/}
-                            {/*onClick={this.props.resetSelectTimer}*/}
-                {/*>*/}
-                    {/*<IconClose />*/}
-                {/*</IconButton>*/}
+                {/* <IconButton key={'icon'}*/}
+                            {/* className={'b-footer__close'} // TODO: заменить класс и  переместить стили*/}
+                            {/* onClick={this.props.resetSelectTimer}*/}
+                {/* >*/}
+                    {/* <IconClose />*/}
+                {/* </IconButton>*/}
             </div>
         );
     }

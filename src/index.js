@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 
 
-import { AppContainer } from 'react-hot-loader'
+import {AppContainer} from 'react-hot-loader';
 import './index.css';
 import App from './App';
 import store from './store';
@@ -11,6 +11,9 @@ import store from './store';
 
 // registerServiceWorker();
 
+/**
+ * @param {JSX} Component
+ */
 const render = Component => {
     ReactDOM.render(
         <AppContainer>
@@ -19,7 +22,7 @@ const render = Component => {
             </Provider>
         </AppContainer>,
         document.getElementById('root'),
-    )
+    );
 };
 
 render(App);
@@ -27,6 +30,6 @@ render(App);
 // Webpack Hot Module Replacement API
 if (module.hot) {
     module.hot.accept('./App', () => {
-        render(App)
-    })
+        render(App);
+    });
 }

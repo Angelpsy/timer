@@ -1,22 +1,27 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 
 import {ACTIONS} from '../constants/actions';
 import timer from './timer';
 
+/**
+ * @param {Object} state
+ * @param {{type: String}} action
+ * @return {state}
+ */
 const byId = (state = {}, action) => {
     switch (action.type) {
-
         // TODO: вынести в отдельную функцию, с возможностью переиспользовать в ADD_TIMER и RESORT_TIMERS
+        // eslint-disable-next-line no-case-declarations
         case ACTIONS.GET_TIMERS:
             const _obj1 = {};
 
             // Построение базового дерева
-            action.payload.timers.forEach((item) => {
+            action.payload.timers.forEach(item => {
                 _obj1[item.id] = timer(item, action);
             });
 
             // Добавление данных о родителях и следующих таймерах для имеющих родителей
-            action.payload.timers.forEach((item) => {
+            action.payload.timers.forEach(item => {
                 if (!item.childTimers) {
                     return;
                 }
@@ -53,10 +58,15 @@ const byId = (state = {}, action) => {
                 [action.id]: timer(state[action.id], action),
             };
         default:
-            return state
+            return state;
     }
 };
 
+/**
+ * @param {String[]} state
+ * @param {{type: String}} action
+ * @return {state}
+ */
 const allIds = (state = [], action) => {
     switch (action.type) {
         case ACTIONS.GET_TIMERS:
@@ -72,7 +82,7 @@ const allIds = (state = [], action) => {
         // case ACTIONS.ADD_TIMER:
         //     return [ ...state, timer(null, action).id ];
         default:
-            return state
+            return state;
     }
 };
 
@@ -87,7 +97,7 @@ export default timers;
  * @param {{byId: Object, allIds: Array}} state
  * @return {timer[]}
  */
-export const getAllTimers = (state) => state.allIds.map(id => state.byId[id]);
+export const getAllTimers = state => state.allIds.map(id => state.byId[id]);
 
 // TODO: функция фильтрации, возвращающая только список таймеров, которые нужно сейчас отобразить
 // (фильтрация по родителю или вывод всех таймеров верхнего уровня, если получено нулевое id в качестве родителя)

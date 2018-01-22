@@ -9,7 +9,6 @@ import {selectedTimer} from '../../actionCreators';
 import {getAllTimers} from '../../reducers';
 
 class TimersContainer extends Component {
-
     onSelectTimer(timer) {
         this.props.onSelectTimer(timer.id);
     }
@@ -22,7 +21,7 @@ class TimersContainer extends Component {
                     this.props.timers
                         .filter(timer => timer.isTopLevel)
                         .sort((timerA, timerB) => timerA.order - timerB.order)
-                        .map((timer) => {
+                        .map(timer => {
                             return (
                                 <ListItem
                                     value={timer.id}
@@ -39,21 +38,32 @@ class TimersContainer extends Component {
     }
 }
 
+/**
+ * @param {Object} state
+ * @return {{selectedTimer: Object, timers: timer[]}}
+ */
 const mapStateToProps = state => {
     return {
         selectedTimer: state.selectedTimer,
         timers: getAllTimers(state),
-    }
+    };
 };
 
+/**
+ * @param {Function} dispatch
+ * @return {{onSelectTimer: function(*=)}}
+ */
 const mapDispatchToProps = dispatch => {
     return {
         onSelectTimer: id => {
             dispatch(selectedTimer(id));
         },
-    }
+    };
 };
 
+/**
+ * @return {Class}
+ */
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
