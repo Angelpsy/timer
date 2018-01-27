@@ -96,18 +96,15 @@ class CurrentTimer extends Component {
                         <TimeVal
                             className="b-current-timer__val"
                             isshort={1}
+                            isLeft
                             val={left}
                             style={{
-                                color: this.props.muiTheme.palette.accent1Color,
                                 opacity: left !== value ? 1 : 0,
                             }}
                         />
                         <TimeVal
                             className="b-current-timer__val"
                             val={value}
-                            style={{
-                                color: this.props.muiTheme.palette.primary1Color,
-                            }}
                         />
                     </div>
                 </div>

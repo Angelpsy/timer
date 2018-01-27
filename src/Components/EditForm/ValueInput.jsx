@@ -2,6 +2,8 @@ import React, {PureComponent} from 'react';
 import {secToHMS, hmsToSec} from '../../helpers/formatted';
 import PropTypes from 'prop-types';
 
+import './ValueInput.css';
+
 /**
  * @param {{amount: Number, selectValue: Number}} props
  * @return {JSX}

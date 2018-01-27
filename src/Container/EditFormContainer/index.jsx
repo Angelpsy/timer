@@ -43,8 +43,6 @@ const mapDispatchToProps = dispatch => {
          * @param {Object} timer: new Data
          */
         onSaveTimer: (id, timer) => {
-            console.log(id);
-            console.log(timer);
             dispatch(editTimer(id, timer));
         },
     };

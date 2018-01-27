@@ -1,0 +1,19 @@
+.b-value-input {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+}
+
+.b-value-input__field {
+    min-width: 4em;
+}
+
+.b-value-input__field-name {
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.b-value-input__field-input {
+    width: 100%;
+    min-height: 24px;
+}

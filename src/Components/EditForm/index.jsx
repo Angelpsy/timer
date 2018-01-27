@@ -5,8 +5,11 @@ import './index.css';
 
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import {secToHMS, hmsToSec} from '../../helpers/formatted';
+import TextField from 'material-ui/TextField';
+
+import {secToHMS} from '../../helpers/formatted';
 import ValueInput from './ValueInput';
+import TimerVal from '../TimeVal';
 
 const styleDialog = {
     width: '98%',
@@ -101,7 +104,9 @@ class EditForm extends Component {
         });
     };
 
-    onSave = () => {
+    onSave = e => {
+        e.preventDefault();
+
         if (this.props.timer) {
             this.props.onSaveTimer(this.props.timer.id, {
                 title: this.state.title,
@@ -127,30 +132,33 @@ class EditForm extends Component {
                     display: 'flex',
                     justifyContent: 'flex-start',
                 }}
+                titleStyle={{paddingBottom: 0}}
                 contentStyle={styleDialog}
             >
                 {/* TODO: сделать отдельным компонентом, чтобы не было дополнительного рендера при смене left*/}
-                <form className="b-edit-form__form">
-                    <label className="b-edit-form__field">
-                        <span className="b-edit-form__field-name">Title:</span>
-                        <input className="b-edit-form__field-input"
-                               name="title"
-                               value={title}
-                               onChange={this.onChangeInput}
-                        />
-                    </label>
+                <form className="b-edit-form__form" onSubmit={this.onSave}>
+                    <TextField
+                        className="b-edit-form__field"
+                        hintText="Title"
+                        floatingLabelText="Title"
+                        name="title"
+                        value={title}
+                        onChange={this.onChangeInput}
+                    />
 
-                    <label className="b-edit-form__field">
-                        <span className="b-edit-form__field-name">Description:</span>
-                        <textarea className="b-edit-form__field-textarea"
-                               name="description"
-                               value={description}
-                               onChange={this.onChangeInput}
-                        />
-                    </label>
+                    <TextField
+                        className="b-edit-form__field"
+                        hintText="Title"
+                        floatingLabelText="Description"
+                        name="description"
+                        value={description}
+                        onChange={this.onChangeInput}
+                        multiLine={true}
+                    />
 
-                    <label className="b-edit-form__field">
-                        <div className="b-edit-form__field-name">Value:</div>
+                    <label
+                        style={{marginTop: '16px'}}
+                        className="b-edit-form__field">
                         <ValueInput
                             name="value"
                             className="b-edit-form__field-input-value"
@@ -162,7 +170,7 @@ class EditForm extends Component {
 
                 {/* TODO: сделать отдельным компонентом, чтобы не было дополнительного рендера при смене left*/}
                 {timer.id && timer.state !== 'stop' ?
-                    <div>Left: {JSON.stringify(secToHMS(timer.left))}</div>
+                    <TimerVal isLeft className='b-edit-form__timer-left' val={timer.left}/>
                     : null}
             </Dialog>
         );
