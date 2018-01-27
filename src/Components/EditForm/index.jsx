@@ -104,9 +104,10 @@ class EditForm extends Component {
         });
     };
 
-    onSave = e => {
-        e.preventDefault();
-
+    /**
+     * props.onSaveTimer OR props.onAddTomer (_TODO) and props.onClose
+     */
+    onSave = () => {
         if (this.props.timer) {
             this.props.onSaveTimer(this.props.timer.id, {
                 title: this.state.title,
@@ -115,6 +116,14 @@ class EditForm extends Component {
             });
         } // TODO: добавить addTimer после реализации возможности добавления таймера
         this.props.onClose();
+    };
+
+    /**
+     *  @param {Event} e
+     */
+    onSubmit = e => {
+        e.preventDefault();
+        this.onSave();
     };
 
     render() {
@@ -136,7 +145,7 @@ class EditForm extends Component {
                 contentStyle={styleDialog}
             >
                 {/* TODO: сделать отдельным компонентом, чтобы не было дополнительного рендера при смене left*/}
-                <form className="b-edit-form__form" onSubmit={this.onSave}>
+                <form className="b-edit-form__form" onSubmit={this.onSubmit}>
                     <TextField
                         className="b-edit-form__field"
                         hintText="Title"
