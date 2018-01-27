@@ -22,8 +22,7 @@ class Timer extends Component {
 }
 
 Timer.propTypes = {
-    child: PropTypes.array,
-    isTopLevel: PropTypes.bool,
+    childTimers: PropTypes.array,
 };
 
 export default Timer;

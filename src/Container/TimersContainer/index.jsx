@@ -5,13 +5,16 @@ import SelectableList from './SelectableList';
 import {ListItem} from 'material-ui/List';
 import Timer from '../../Components/Timer';
 
-import {selectedTimer} from '../../actionCreators';
+import {
+    selectedTimer,
+    selectedTimerForEdit,
+} from '../../actionCreators';
 import {getAllTimers} from '../../reducers';
 
 class TimersContainer extends Component {
-    onSelectTimer(timer) {
-        this.props.onSelectTimer(timer.id);
-    }
+    onSelectTimer = id => {
+        this.props.onSelectTimer(id);
+    };
 
     render() {
         return (
@@ -26,9 +29,9 @@ class TimersContainer extends Component {
                                 <ListItem
                                     value={timer.id}
                                     key={timer.id}
-                                    onClick={this.onSelectTimer.bind(this, timer)}
+                                    onClick={() => this.onSelectTimer(timer.id)}
                                 >
-                                    <Timer {...timer}/>
+                                    <Timer {...timer} onSelectTimerForEdit={this.props.onSelectTimerForEdit}/>
                                 </ListItem>
                             );
                         })
@@ -57,6 +60,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onSelectTimer: id => {
             dispatch(selectedTimer(id));
+        },
+        onSelectTimerForEdit: id => {
+            dispatch(selectedTimerForEdit(id));
         },
     };
 };

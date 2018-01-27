@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
 import './index.css';
+import PropTypes from 'prop-types';
+
+
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -24,8 +33,29 @@ const iconEmum = {
     stop: IconStop,
 };
 
-
 class Timer extends Component {
+    state = {
+        isOpenMenu: false,
+    };
+
+    handleClickMore = e => {
+        this.setState({
+            isOpenMenu: !this.state.isOpenMenu,
+            anchorEl: e.currentTarget,
+        });
+    };
+
+    handleRequestClose = () => {
+        this.setState({
+            isOpenMenu: false,
+        });
+    };
+
+    handleClickEdit = () => {
+        this.props.onSelectTimerForEdit(this.props.id);
+        this.handleRequestClose();
+    };
+
     render() {
         const {
             // id,
@@ -41,6 +71,26 @@ class Timer extends Component {
 
         return (
             <div className={'b-timer'}>
+                <div className="b-timer__more" onClick={e => e.stopPropagation()}>
+                    <IconButton onClick={this.handleClickMore}><MoreVertIcon /></IconButton>
+                    <Popover
+                        open={this.state.isOpenMenu}
+                        anchorEl={this.state.anchorEl}
+                        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                        onRequestClose={this.handleRequestClose}
+                        animation={PopoverAnimationVertical}
+                        useLayerForClickAway={false}
+                    >
+                        <Menu>
+                            <MenuItem
+                                style={{minWidth: '150px'}}
+                                onClick={this.handleClickEdit}
+                                primaryText="Edit"
+                            />
+                        </Menu>
+                    </Popover>
+                </div>
                 <Subheader
                     className="b-timer__header"
                     style={{
@@ -83,6 +133,9 @@ class Timer extends Component {
     }
 }
 
-Timer.propTypes = timerShape;
+Timer.propTypes = {
+    ...timerShape,
+    onSelectTimerForEdit: PropTypes.func.isRequired,
+};
 
 export default muiThemeable()(Timer);

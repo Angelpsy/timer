@@ -35,6 +35,7 @@ module.exports = {
             },
         }],
         'linebreak-style': 0,
+        'no-invalid-this': 0,
     },
     'globals': {
         'env': true,

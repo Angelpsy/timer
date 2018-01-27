@@ -1,9 +1,15 @@
 .b-timer {
-    /**/
+    position: relative;
 }
 
 .b-timer__main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.b-timer__more {
+    position: absolute;
+    top: -16px;
+    right: -16px;
 }

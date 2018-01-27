@@ -7,6 +7,7 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import TimersContainer from '../../Container/TimersContainer';
 import Player from '../../Container/PlayerContainer';
+import EditForm from '../../Container/EditFormContainer';
 
 /**
  * @class
@@ -37,6 +38,7 @@ class BaseLayout extends Component {
                 </main>
                 <Footer className={'l-base__footer'}/>
                 <Player />
+                <EditForm />
             </div>
         );
     }

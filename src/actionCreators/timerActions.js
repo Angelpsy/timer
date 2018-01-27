@@ -68,6 +68,21 @@ export const addTimer = timer => {
 };
 
 /**
+ * @param {id} id
+ * @param {Object} timer
+ * @return {{type: string, id: id, payload: {timer: Object}}}
+ */
+export const editTimer = (id, timer) => {
+    return {
+        type: ACTIONS.EDIT_TIMER,
+        id,
+        payload: {
+            timer,
+        },
+    };
+};
+
+/**
  * @param {String} id
  * @param {Boolean} isNext
  * @return {{type: string, payload: {id: String}}}

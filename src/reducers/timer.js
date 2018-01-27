@@ -27,6 +27,18 @@ const timer = (state = {}, action) => {
                 left: action.payload.value,
                 state: 'stop',
             };
+        // eslint-disable-next-line no-case-declarations
+        case ACTIONS.EDIT_TIMER:
+            const tmp = {};
+            if (state.left > action.payload.timer.value) {
+                tmp.left = action.payload.timer.value;
+                tmp.state = 'stop';
+            }
+            return {
+                ...state,
+                ...tmp,
+                ...action.payload.timer,
+            };
         case ACTIONS.PLAY_TIMER:
             if (state.state !== 'play') {
                 return {

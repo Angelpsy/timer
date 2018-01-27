@@ -49,6 +49,7 @@ const byId = (state = {}, action) => {
         //     };
         // case ACTIONS.RESORT_TIMERS:
         //    TODO: Создание родительских и соседних отношений
+        case ACTIONS.EDIT_TIMER:
         case ACTIONS.PLAY_TIMER:
         case ACTIONS.PAUSE_TIMER:
         case ACTIONS.STOP_TIMER:
