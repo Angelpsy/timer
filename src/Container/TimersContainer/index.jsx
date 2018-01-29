@@ -8,6 +8,7 @@ import Timer from '../../Components/Timer';
 import {
     selectedTimer,
     selectedTimerForEdit,
+    deleteTimer,
 } from '../../actionCreators';
 import {getAllTimers} from '../../reducers';
 
@@ -31,7 +32,11 @@ class TimersContainer extends Component {
                                     key={timer.id}
                                     onClick={() => this.onSelectTimer(timer.id)}
                                 >
-                                    <Timer {...timer} onSelectTimerForEdit={this.props.onSelectTimerForEdit}/>
+                                    <Timer
+                                        {...timer}
+                                        onSelectTimerForEdit={this.props.onSelectTimerForEdit}
+                                        onDeleteTimer={this.props.onDeleteTimer}
+                                    />
                                 </ListItem>
                             );
                         })
@@ -63,6 +68,9 @@ const mapDispatchToProps = dispatch => {
         },
         onSelectTimerForEdit: id => {
             dispatch(selectedTimerForEdit(id));
+        },
+        onDeleteTimer: id => {
+            dispatch(deleteTimer(id));
         },
     };
 };

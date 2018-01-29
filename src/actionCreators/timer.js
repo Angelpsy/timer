@@ -83,6 +83,25 @@ export const editTimer = (id, timer) => {
 };
 
 /**
+ * @param {id} id
+ * @return {{type: string, id: id, payload: {timer: Object}}}
+ */
+export const deleteTimer = id => (dispatch, getState) => {
+    // TODO: удаление дочерних и внучатых таймеров
+
+    const allIds = getState().timers.allIds;
+    const index = allIds.indexOf(id);
+    const idPrevTimer = index !== -1 ? allIds[index - 1] : null;
+    dispatch({
+        type: ACTIONS.DELETE_TIMER,
+        id,
+        payload: {
+            idPrevTimer,
+        },
+    });
+};
+
+/**
  * @param {String} id
  * @param {Boolean} isNext
  * @return {{type: string, payload: {id: String}}}

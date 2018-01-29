@@ -11,7 +11,6 @@ import timer from './timer';
 const byId = (state = {}, action) => {
     switch (action.type) {
         // TODO: вынести в отдельную функцию, с возможностью переиспользовать в ADD_TIMER и RESORT_TIMERS
-        // eslint-disable-next-line no-case-declarations
         case ACTIONS.GET_TIMERS:
             const _obj1 = {};
 
@@ -49,6 +48,20 @@ const byId = (state = {}, action) => {
         //     };
         // case ACTIONS.RESORT_TIMERS:
         //    TODO: Создание родительских и соседних отношений
+        case ACTIONS.DELETE_TIMER:
+            const tmpState = {...state};
+
+            // TODO: попробовать перенести в middleware
+            // change prev_timer.next to deleted_timer.next
+            if (action.payload.idPrevTimer) {
+                tmpState[action.payload.idPrevTimer] = {
+                    ...tmpState[action.payload.idPrevTimer],
+                    next: tmpState[action.id].next,
+                };
+            }
+            delete tmpState[action.id];
+            return tmpState;
+        // TODO: Редактирование родительских отношений, удаление дочерних и внучатых таймеров
         case ACTIONS.EDIT_TIMER:
         case ACTIONS.PLAY_TIMER:
         case ACTIONS.PAUSE_TIMER:
@@ -82,6 +95,16 @@ const allIds = (state = [], action) => {
                 .map(item => item.id);
         // case ACTIONS.ADD_TIMER:
         //     return [ ...state, timer(null, action).id ];
+        case ACTIONS.DELETE_TIMER:
+            const index = state.indexOf(action.id);
+            if (index === -1) {
+                return state;
+            }
+
+            return [
+                ...state.slice(0, index),
+                ...state.slice(index + 1),
+            ];
         default:
             return state;
     }

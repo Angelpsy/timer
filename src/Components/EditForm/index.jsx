@@ -31,7 +31,7 @@ const actions = props => {
             <FlatButton
                 label="Delete Timer"
                 secondary={true}
-                onClick={props.onClose}
+                onClick={props.onDelete}
                 style={stylesButtons}
             /> : null,
         <FlatButton
@@ -118,6 +118,11 @@ class EditForm extends Component {
         this.props.onClose();
     };
 
+    onDelete = () => {
+        this.props.onDeleteTimer(this.props.timer.id);
+        this.props.onClose();
+    };
+
     /**
      *  @param {Event} e
      */
@@ -133,7 +138,11 @@ class EditForm extends Component {
             <Dialog
                 className='b-edit-form'
                 title={this.props.titleForm}
-                actions={actions({...this.props, onSave: this.onSave})}
+                actions={actions({
+                    ...this.props,
+                    onSave: this.onSave,
+                    onDelete: this.onDelete,
+                })}
                 modal={false}
                 open={this.props.isOpen}
                 onRequestClose={this.props.onClose}
@@ -147,6 +156,7 @@ class EditForm extends Component {
                 {/* TODO: сделать отдельным компонентом, чтобы не было дополнительного рендера при смене left*/}
                 <form className="b-edit-form__form" onSubmit={this.onSubmit}>
                     <TextField
+                        autoFocus // TODO: only add new timer
                         className="b-edit-form__field"
                         hintText="Title"
                         floatingLabelText="Title"
@@ -177,7 +187,6 @@ class EditForm extends Component {
                     </label>
                 </form>
 
-                {/* TODO: сделать отдельным компонентом, чтобы не было дополнительного рендера при смене left*/}
                 {timer.id && timer.state !== 'stop' ?
                     <TimerVal isLeft className='b-edit-form__timer-left' val={timer.left}/>
                     : null}

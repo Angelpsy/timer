@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import EditForm from '../../Components/EditForm';
 import {closeEditForm} from '../../actionCreators';
-import {editTimer} from '../../actionCreators/timerActions';
+import {editTimer, deleteTimer} from '../../actionCreators';
 
 class EditFormContainer extends Component {
     render() {
@@ -44,6 +44,12 @@ const mapDispatchToProps = dispatch => {
          */
         onSaveTimer: (id, timer) => {
             dispatch(editTimer(id, timer));
+        },
+        /**
+         * @param {id} id
+         */
+        onDeleteTimer: id => {
+            dispatch(deleteTimer(id));
         },
     };
 };

@@ -33,6 +33,12 @@ const iconEmum = {
     stop: IconStop,
 };
 
+/**
+ * @param {Object} props
+ * @return {JSX}
+ */
+const MenuItemForDropDown = props => <MenuItem {...props} style={{minWidth: '150px'}}/>;
+
 class Timer extends Component {
     state = {
         isOpenMenu: false,
@@ -53,6 +59,11 @@ class Timer extends Component {
 
     handleClickEdit = () => {
         this.props.onSelectTimerForEdit(this.props.id);
+        this.handleRequestClose();
+    };
+
+    handleClickDelete = () => {
+        this.props.onDeleteTimer(this.props.id);
         this.handleRequestClose();
     };
 
@@ -83,10 +94,13 @@ class Timer extends Component {
                         useLayerForClickAway={false}
                     >
                         <Menu>
-                            <MenuItem
-                                style={{minWidth: '150px'}}
+                            <MenuItemForDropDown
                                 onClick={this.handleClickEdit}
                                 primaryText="Edit"
+                            />
+                            <MenuItemForDropDown
+                                onClick={this.handleClickDelete}
+                                primaryText="Delete"
                             />
                         </Menu>
                     </Popover>
@@ -136,6 +150,7 @@ class Timer extends Component {
 Timer.propTypes = {
     ...timerShape,
     onSelectTimerForEdit: PropTypes.func.isRequired,
+    onDeleteTimer: PropTypes.func.isRequired,
 };
 
 export default muiThemeable()(Timer);

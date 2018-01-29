@@ -4,12 +4,14 @@ export {
 
 export {
     getTimers,
+    editTimer,
+    deleteTimer,
     selectedTimer,
     playTimer,
     pauseTimer,
     stopTimer,
     tick,
-} from './timerActions';
+} from './timer';
 
 export {
     startAudio,
