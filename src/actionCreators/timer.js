@@ -3,6 +3,8 @@ import {getAllTimers} from '../reducers';
 
 import {timers as testData} from '../store/TestData';
 
+import nanoid from 'nanoid';
+
 /**
  * @return {Promise<void>}
  */
@@ -56,15 +58,23 @@ export const selectedTimer = id => {
  * @param {{title: String, description: String, value: Number}} timer
  * @return {{type: string, payload: {title, description, value}}}
  */
-export const addTimer = timer => {
-    return {
+export const addTimer = timer => (dispatch, getState) => {
+    const timersAllIds = getState().timers.allIds;
+    const order = timersAllIds.length;
+    const idPrevTimer = order ? timersAllIds[order - 1] : null;
+    dispatch({
         type: ACTIONS.ADD_TIMER,
+        id: nanoid(),
         payload: {
             title: timer.title,
             description: timer.description,
             value: timer.value,
+            order,
+            parent: null, // TODO: изменить после добавления групп таймеров
+            next: null,
+            idPrevTimer,
         },
-    };
+    });
 };
 
 /**
@@ -112,16 +122,12 @@ export const playTimer = (id, isNext) => {
             return;
         }
 
+        const timer = getState().timers.byId[id];
         // TODO: временный запрет за запуск групп таймеров
-        if (getState().timers.byId[id].childTimers) {
+
+        if (timer.childTimers || !timer.left) {
             return;
         }
-
-        // // TODO: убрать отдельный action - запускать в reducer audio по action.play_timer
-        // // продумать как запускать не по первому play (возможно ввести action.play_next_timer)
-        //  if (isNext) {
-        //      dispatch(startAudio('start'));
-        //  }
 
         dispatch(tick(id));
         dispatch({

@@ -41,11 +41,15 @@ const byId = (state = {}, action) => {
                 );
 
             return _obj1;
-        // case ACTIONS.ADD_TIMER:
-        //     return {
-        //         ...state,
-        //         [action.id]: timer(null, action),
-        //     };
+        case ACTIONS.ADD_TIMER:
+            return {
+                ...state,
+                [action.id]: timer(null, action),
+                [action.payload.idPrevTimer]: {
+                    ...state[action.payload.idPrevTimer],
+                    next: action.id,
+                },
+            };
         // case ACTIONS.RESORT_TIMERS:
         //    TODO: Создание родительских и соседних отношений
         case ACTIONS.DELETE_TIMER:
@@ -93,8 +97,11 @@ const allIds = (state = [], action) => {
             return state.map(id => action.payload.timers[id])
                 .sort((a, b) => a.order - b.order)
                 .map(item => item.id);
-        // case ACTIONS.ADD_TIMER:
-        //     return [ ...state, timer(null, action).id ];
+        case ACTIONS.ADD_TIMER:
+            return [
+                ...state,
+                action.id,
+            ];
         case ACTIONS.DELETE_TIMER:
             const index = state.indexOf(action.id);
             if (index === -1) {

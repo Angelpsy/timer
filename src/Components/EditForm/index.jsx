@@ -22,12 +22,12 @@ const styleDialog = {
  */
 const actions = props => {
     const stylesButtons = {};
-    if (props.timer) {
+    if (props.timer.id) {
         stylesButtons.minWidth = '0';
     }
 
     return [
-        props.timer ?
+        props.timer.id ?
             <FlatButton
                 label="Delete Timer"
                 secondary={true}
@@ -41,20 +41,14 @@ const actions = props => {
             style={stylesButtons}
         />,
         <FlatButton
-            label={`${props.timer ? 'Save' : 'Add'}`}
+            label={`${props.timer.id ? 'Save' : 'Add'}`}
             primary={true}
             keyboardFocused={false}
             onClick={props.onSave}
             style={stylesButtons}
+            disabled={!props.isSubmitEnabled}
         />,
     ];
-};
-
-const defaultTimer = {
-    title: '',
-    description: '',
-    value: 0,
-    left: 0,
 };
 
 class EditForm extends Component {
@@ -104,17 +98,32 @@ class EditForm extends Component {
         });
     };
 
+    getIsSubmitEnabled = () => {
+        return (
+            (this.state.title !== this.props.timer.title ||
+            this.state.description !== this.props.timer.description ||
+            this.state.value !== this.props.timer.value) && // validation change
+            (this.state.title && this.state.description) // validation to empty
+        );
+    };
+
     /**
-     * props.onSaveTimer OR props.onAddTomer (_TODO) and props.onClose
+     * props.onSaveTimer OR props.onAddTimer (_TODO) and props.onClose
      */
     onSave = () => {
-        if (this.props.timer) {
+        if (this.props.timer.id) {
             this.props.onSaveTimer(this.props.timer.id, {
                 title: this.state.title,
                 description: this.state.description,
                 value: this.state.value,
             });
-        } // TODO: добавить addTimer после реализации возможности добавления таймера
+        } else {
+            this.props.onAddTimer({
+                title: this.state.title,
+                description: this.state.description,
+                value: this.state.value,
+            });
+        }
         this.props.onClose();
     };
 
@@ -132,7 +141,6 @@ class EditForm extends Component {
     };
 
     render() {
-        const timer = this.props.timer || defaultTimer;
         const {title, description, value} = this.state;
         return (
             <Dialog
@@ -142,6 +150,7 @@ class EditForm extends Component {
                     ...this.props,
                     onSave: this.onSave,
                     onDelete: this.onDelete,
+                    isSubmitEnabled: this.getIsSubmitEnabled(),
                 })}
                 modal={false}
                 open={this.props.isOpen}
@@ -187,8 +196,8 @@ class EditForm extends Component {
                     </label>
                 </form>
 
-                {timer.id && timer.state !== 'stop' ?
-                    <TimerVal isLeft className='b-edit-form__timer-left' val={timer.left}/>
+                {this.props.timer.id && this.props.timer.state !== 'stop' ?
+                    <TimerVal isLeft className='b-edit-form__timer-left' val={this.props.timer.left}/>
                     : null}
             </Dialog>
         );

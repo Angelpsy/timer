@@ -18,14 +18,17 @@ const timer = (state = {}, action) => {
                 : state;
         case ACTIONS.ADD_TIMER:
             return {
-                id: nanoid(),
-                order: 0,
+                id: action.id,
+                order: action.payload.order,
                 title: action.payload.title,
                 description: action.payload.description,
                 childTimers: null,
                 value: action.payload.value,
                 left: action.payload.value,
                 state: 'stop',
+                parent: action.payload.parent,
+                isTopLevel: !action.payload.parent,
+                next: action.payload.next,
             };
         case ACTIONS.EDIT_TIMER:
             return {

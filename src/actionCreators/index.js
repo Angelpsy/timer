@@ -4,6 +4,7 @@ export {
 
 export {
     getTimers,
+    addTimer,
     editTimer,
     deleteTimer,
     selectedTimer,
