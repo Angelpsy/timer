@@ -7,6 +7,7 @@ export {
     addTimer,
     editTimer,
     deleteTimer,
+    resortTimers,
     selectedTimer,
     playTimer,
     pauseTimer,

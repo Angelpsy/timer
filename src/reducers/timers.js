@@ -10,7 +10,6 @@ import timer from './timer';
  */
 const byId = (state = {}, action) => {
     switch (action.type) {
-        // TODO: вынести в отдельную функцию, с возможностью переиспользовать в ADD_TIMER и RESORT_TIMERS
         case ACTIONS.GET_TIMERS:
             const _obj1 = {};
 
@@ -19,7 +18,7 @@ const byId = (state = {}, action) => {
                 _obj1[item.id] = timer(item, action);
             });
 
-            // Добавление данных о родителях и следующих таймерах для имеющих родителей
+            // Добавление данных о родителях для имеющих родителей
             action.payload.timers.forEach(item => {
                 if (!item.childTimers) {
                     return;
@@ -27,18 +26,9 @@ const byId = (state = {}, action) => {
                 item.childTimers
                     .sort((a, b) => _obj1[a].order - _obj1[b].order)
                     .forEach((id, i, arr) => {
-                        _obj1[id].next = arr[i + 1] || null;
                         _obj1[id].parent = item.id;
                     });
             });
-
-            // Добавление данных о следующих таймерах для верхнего уровня
-            action.payload.timers
-                .filter(item => item.isTopLevel)
-                .sort((a, b) => a.order - b.order)
-                .forEach((item, i, arr) =>
-                    _obj1[item.id].next = arr[i + 1] ? arr[i + 1].id : null
-                );
 
             return _obj1;
         case ACTIONS.ADD_TIMER:
@@ -50,22 +40,24 @@ const byId = (state = {}, action) => {
                     next: action.id,
                 },
             };
-        // case ACTIONS.RESORT_TIMERS:
-        //    TODO: Создание родительских и соседних отношений
         case ACTIONS.DELETE_TIMER:
             const tmpState = {...state};
-
-            // TODO: попробовать перенести в middleware
-            // change prev_timer.next to deleted_timer.next
-            if (action.payload.idPrevTimer) {
-                tmpState[action.payload.idPrevTimer] = {
-                    ...tmpState[action.payload.idPrevTimer],
-                    next: tmpState[action.id].next,
-                };
-            }
             delete tmpState[action.id];
             return tmpState;
         // TODO: Редактирование родительских отношений, удаление дочерних и внучатых таймеров
+        case ACTIONS.RESORT_TIMERS:
+            const _obj = {...state};
+            action.payload.allIds
+                .map(id => action.payload.byId[id])
+                .sort((a, b) => a.order - b.order)
+                .forEach((timer, index) => {
+                    _obj[timer.id] = {
+                        ..._obj[timer.id],
+                        next: action.payload.allIds[index + 1] || null,
+                        order: index,
+                    };
+                });
+            return _obj;
         case ACTIONS.EDIT_TIMER:
         case ACTIONS.PLAY_TIMER:
         case ACTIONS.PAUSE_TIMER:
@@ -90,12 +82,6 @@ const allIds = (state = [], action) => {
         case ACTIONS.GET_TIMERS:
             return action.payload.timers
                 .filter(timer => timer.isTopLevel)
-                .sort((a, b) => a.order - b.order)
-                .map(item => item.id);
-        case ACTIONS.RESORT_TIMERS:
-            // TODO: после реализации добавления/удаления проверить
-            return state.map(id => action.payload.timers[id])
-                .sort((a, b) => a.order - b.order)
                 .map(item => item.id);
         case ACTIONS.ADD_TIMER:
             return [
@@ -112,6 +98,10 @@ const allIds = (state = [], action) => {
                 ...state.slice(0, index),
                 ...state.slice(index + 1),
             ];
+        case ACTIONS.RESORT_TIMERS:
+            return state.map(id => action.payload.byId[id])
+                .sort((a, b) => a.order - b.order)
+                .map(item => item.id);
         default:
             return state;
     }

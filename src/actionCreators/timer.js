@@ -36,9 +36,9 @@ export const getTimers = () => {
  */
 export const resortTimers = timers => {
     return {
-        type: ACTIONS.GET_TIMERS,
+        type: ACTIONS.RESORT_TIMERS,
         payload: {
-            timers: timers,
+            ...timers,
         },
     };
 };
@@ -71,7 +71,6 @@ export const addTimer = timer => (dispatch, getState) => {
             value: timer.value,
             order,
             parent: null, // TODO: изменить после добавления групп таймеров
-            next: null,
             idPrevTimer,
         },
     });
@@ -94,26 +93,18 @@ export const editTimer = (id, timer) => {
 
 /**
  * @param {id} id
- * @return {{type: string, id: id, payload: {timer: Object}}}
+ * @return {{type: string, id: id}} Action
  */
-export const deleteTimer = id => (dispatch, getState) => {
-    // TODO: удаление дочерних и внучатых таймеров
-
-    const allIds = getState().timers.allIds;
-    const index = allIds.indexOf(id);
-    const idPrevTimer = index !== -1 ? allIds[index - 1] : null;
-    dispatch({
+export const deleteTimer = id => {
+    return {
         type: ACTIONS.DELETE_TIMER,
         id,
-        payload: {
-            idPrevTimer,
-        },
-    });
+    };
 };
 
 /**
  * @param {String} id
- * @param {Boolean} isNext
+ * @param {Boolean=} isNext
  * @return {{type: string, payload: {id: String}}}
  */
 export const playTimer = (id, isNext) => {
@@ -123,8 +114,8 @@ export const playTimer = (id, isNext) => {
         }
 
         const timer = getState().timers.byId[id];
-        // TODO: временный запрет за запуск групп таймеров
 
+        // TODO: временный запрет за запуск групп таймеров
         if (timer.childTimers || !timer.left) {
             return;
         }

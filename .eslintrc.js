@@ -37,6 +37,9 @@ module.exports = {
         'linebreak-style': 0,
         'no-invalid-this': 0,
         'no-case-declarations': 0,
+        'no-trailing-spaces': ['error', {
+            'skipBlankLines': true,
+        }],
     },
     'globals': {
         'env': true,

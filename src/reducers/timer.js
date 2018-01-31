@@ -28,7 +28,6 @@ const timer = (state = {}, action) => {
                 state: 'stop',
                 parent: action.payload.parent,
                 isTopLevel: !action.payload.parent,
-                next: action.payload.next,
             };
         case ACTIONS.EDIT_TIMER:
             return {
