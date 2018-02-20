@@ -14,6 +14,9 @@ const audio = (state = {}, action) => {
                 type: 'start',
             };
         case ACTIONS.STOP_TIMER:
+            if (action.payload.prevState === 'pause') {
+                return state;
+            }
             return {
                 ...state,
                 isPlay: true,

@@ -156,15 +156,16 @@ export const pauseTimer = id => {
  * @param {String} id
  * @return {{type: string, payload: {id: String}}}
  */
-export const stopTimer = id => {
-    return dispatch => {
-        // dispatch(startAudio('stop'));
-        // TODO: убрать отдельный action - запускать в reducer audio по action.stop_timer
-        dispatch({
-            type: ACTIONS.STOP_TIMER,
-            id,
-        });
-    };
+export const stopTimer = id => (dispatch, getState) => {
+    const prevState = getState().timers.byId[id].state;
+
+    dispatch({
+        type: ACTIONS.STOP_TIMER,
+        id,
+        payload: {
+            prevState,
+        },
+    });
 };
 
 /**

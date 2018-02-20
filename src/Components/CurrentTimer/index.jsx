@@ -124,6 +124,7 @@ CurrentTimer.propTypes = {
     playTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
-    ...timerShape};
+    ...timerShape,
+};
 
 export default muiThemeable()(CurrentTimer);
